@@ -1,0 +1,125 @@
+<resources>
+    <dimen name="fab_margin">16dp</dimen>
+    <dimen name="threedp">3dp</dimen>
+    <dimen name="fivedp">5dp</dimen>
+    <dimen name="eightdp">8dp</dimen>
+    <dimen name="tenDp">10dp</dimen>
+    <dimen name="fifteendp">15dp</dimen>
+    <dimen name="twentydp">20dp</dimen>
+    <dimen name="twentyfivedp">25dp</dimen>
+    <dimen name="thirtyDp">30dp</dimen>
+    <dimen name="thirtyfivedp">35dp</dimen>
+    <dimen name="fortydp">40dp</dimen>
+    <dimen name="minwidth">150dp</dimen>
+
+    <dimen name="thumb_width">30dp</dimen>
+    <dimen name="thumb_height">30dp</dimen>
+    <dimen name="bubble_thumb_width">70dp</dimen>
+    <dimen name="bubble_thumb_height">70dp</dimen>
+    <dimen name="dots_height">30dp</dimen>
+    <dimen name="dots_margin_bottom">50dp</dimen>
+
+    //textview
+
+    <dimen name="txt_seven">7dp</dimen>
+    <dimen name="txt_eight">8dp</dimen>
+    <dimen name="txt_nine">9dp</dimen>
+    <dimen name="txt_ten">10dp</dimen>
+    <dimen name="txt_eleven">11dp</dimen>
+    <dimen name="txt_twelve">12dp</dimen>
+    <dimen name="txt_thirteen">13dp</dimen>
+    <dimen name="txt_forteen">14dp</dimen>
+    <dimen name="txt_fifteen">15dp</dimen>
+    <dimen name="txt_sixteen">16dp</dimen>
+    <dimen name="txt_seventeen">17dp</dimen>
+    <dimen name="txt_eighteen">18dp</dimen>
+    <dimen name="txt_nineteen">19dp</dimen>
+    <dimen name="txt_twenty">20dp</dimen>
+    <dimen name="txt_twentyone">21dp</dimen>
+    <dimen name="txt_twentytwo">22dp</dimen>
+    <dimen name="txt_twentythree">23dp</dimen>
+    <dimen name="txt_twentyfour">24dp</dimen>
+    <dimen name="txt_twentyfive">25dp</dimen>
+    <dimen name="txt_twentysix">26dp</dimen>
+    <dimen name="txt_twentyseven">27dp</dimen>
+    <dimen name="txt_twenteight">28dp</dimen>
+    <dimen name="txt_twentynine">29dp</dimen>
+    <dimen name="txt_thirty">30dp</dimen>
+    <dimen name="txt_thirtyfive">35dp</dimen>
+
+
+    //image
+
+    <dimen name="img_fifteen">15dp</dimen>
+    <dimen name="img_twenty">20dp</dimen>
+    <dimen name="img_twentyfive">25dp</dimen>
+    <dimen name="img_thirty">30dp</dimen>
+    <dimen name="img_thirtyfive">35dp</dimen>
+    <dimen name="img_fourty">40dp</dimen>
+    <dimen name="img_fourtyfive">45dp</dimen>
+    <dimen name="img_fifty">50dp</dimen>
+    <dimen name="img_sixty">60dp</dimen>
+    <dimen name="img_seventy">70dp</dimen>
+    <dimen name="img_eighty">80dp</dimen>
+    <dimen name="img_ninty">90dp</dimen>
+    <dimen name="img_hundred">100dp</dimen>
+
+
+    // edittext
+    <dimen name="edt_forty">40dp</dimen>
+    <dimen name="edt_fortyfive">45dp</dimen>
+    <dimen name="edt_fifty">50dp</dimen>
+
+    //button
+
+    // edittext
+    <dimen name="btn_thirty">30dp</dimen>
+    <dimen name="btn_thirtyfive">35dp</dimen>
+    <dimen name="btn_forty">45dp</dimen>
+    <dimen name="btn_fortyfive">45dp</dimen>
+    <dimen name="btn_fifty">50dp</dimen>
+    <dimen name="map_top">10dp</dimen>
+
+    // space
+    <dimen name="space_five">5dp</dimen>
+    <dimen name="space_eight">8dp</dimen>
+    <dimen name="space_ten">10dp</dimen>
+    <dimen name="space_twelve">12dp</dimen>
+    <dimen name="space_fifteen">15dp</dimen>
+    <dimen name="space_twenty">20dp</dimen>
+    <dimen name="space_twentfive">25dp</dimen>
+    <dimen name="space_thirty">30dp</dimen>
+    <dimen name="space_thirtyfive">35dp</dimen>
+    <dimen name="space_forty">40dp</dimen>
+    <dimen name="space_fortyfive">45dp</dimen>
+    <dimen name="space_fifty">50dp</dimen>
+    <dimen name="space_fiftyfive">55dp</dimen>
+    <dimen name="space_sixty">60dp</dimen>
+    <dimen name="space_sixtyfive">65dp</dimen>
+    <dimen name="space_seventy">70dp</dimen>
+    <dimen name="space_seventyfive">75dp</dimen>
+    <dimen name="space_eighty">80dp</dimen>
+    <dimen name="space_eightyfive">85dp</dimen>
+    <dimen name="space_ninty">90dp</dimen>
+    <dimen name="sliding_panel_padding">150dp</dimen>
+    <dimen name="sliding_panel_height">68dp</dimen>
+    //header
+    <dimen name="header_size">60dp</dimen>
+    <dimen name="header_backimg">30dp</dimen>
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="header_txt_size">20dp</dimen>
+
+
+    <dimen name="image_left_margin_collapsed">16dp</dimen>
+    <dimen name="image_top_margin_collapsed">64dp</dimen>
+    <dimen name="title_left_margin_collapsed">72dp</dimen>
+    <dimen name="title_top_margin_collapsed">64dp</dimen>
+    <dimen name="subtitle_left_margin_collapsed">72dp</dimen>
+    <dimen name="subtitle_top_margin_collapsed">88dp</dimen>
+    <dimen name="_180dp">180dp</dimen>
+    <dimen name="_0dp">0dp</dimen>
+
+</resources>
