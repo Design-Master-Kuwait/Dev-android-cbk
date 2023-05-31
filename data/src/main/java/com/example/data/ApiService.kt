@@ -21,10 +21,10 @@ interface ApiService {
 
 
     @GET("users/profile")
-    suspend fun getUserProfileApi(@Header("Auth") auth: String): Response<ProfileDataResponseModel>
+    suspend fun getUserProfileApi(): Response<ProfileDataResponseModel>
 
     @GET("dashboard")
-    suspend fun getDashboardApi(@Header("Auth") auth: String): Response<DashboardDataResponseModel>
+    suspend fun getDashboardApi(): Response<DashboardDataResponseModel>
 
 
 }

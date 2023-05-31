@@ -6,6 +6,8 @@
     android:fitsSystemWindows="true"
     tools:context=".ui.login.LoginActivity">
 
-    <include layout="@layout/content_login" />
+    <include android:id="@+id/includedFragment"
+        layout="@layout/content_login" />
+
 
 </androidx.coordinatorlayout.widget.CoordinatorLayout>

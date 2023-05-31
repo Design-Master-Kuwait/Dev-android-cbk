@@ -1,0 +1,62 @@
+<resources>
+    <string name="app_name">مشروع مصرفي جديد</string>
+    <string name="title_activity_login">تسجيل الدخول</string>
+    <!-- Strings used for fragments for navigation -->
+    <string name="first_fragment_label">الجزء الأول</string>
+    <string name="second_fragment_label">الجزء الثاني</string>
+    <string name="next">التالي</string>
+    <string name="previous">سابق</string>
+
+    <string name="internetIsNotAvailable">الإنترنت غير متوفر</string>
+    <string name="login">تسجيل الدخول</string>
+    <string name="phone_number">رقم التليفون</string>
+    <string name="_91">+91</string>
+    <string name="password">كلمة المرور</string>
+    <string name="forgot_password">هل نسيت كلمة السر ؟</string>
+    <string name="continues">يكمل</string>
+    <string name="register_your_self">سجل نفسك</string>
+    <string name="full_name">الاسم الكامل</string>
+    <string name="register">يسجل</string>
+    <string name="phone_error">الرجاء إدخال كلمة المرور الخاصة بك</string>
+    <string name="code_error">يرجى ملء رقم هاتفك</string>
+    <string name="title_activity_main">النشاط الرئيسي</string>
+    <string name="title_home">بيت</string>
+    <string name="title_dashboard">لوحة القيادة</string>
+    <string name="title_notifications">إشعارات</string>
+    <string name="invalid">تسجيل الدخول وكلمة المرور غير صحيحين</string>
+    <string name="profile">حساب تعريفي</string>
+    <string name="settings">إعدادات</string>
+    <string name="change_password">تغيير كلمة المرور</string>
+    <string name="invite_client">قم بدعوة العميل</string>
+    <string name="language">لغة</string>
+    <string name="notification">إشعار</string>
+    <string name="app_policy">سياسة التطبيق</string>
+    <string name="terms_and_conditions">الأحكام والشروط</string>
+    <string name="test_app">اختبار التطبيق</string>
+    <string name="good_morning">صباح الخير</string>
+    <string name="asta_sanghani">أستا سانغاني</string>
+    <string name="daily_needs">الاحتياجات اليومية</string>
+    <string name="customer_s_payment">دفع العميل</string>
+    <string name="logout">تسجيل خروج</string>
+    <string name="e_mail">بريد إلكتروني</string>
+    <string name="update_profile">تحديث الملف</string>
+    <string name="guest">ضيف</string>
+    <string name="save_data">البيانات المحفوظة</string>
+    <string name="camera">آلة تصوير</string>
+    <string name="gallery">صالة عرض</string>
+    <string name="please_select_type">الرجاء تحديد النوع الخاص بك</string>
+    <string name="fingerprint_sensor">ماسح البصمات</string>
+    <string name="cancel">يلغي</string>
+    <string name="ok">نعم</string>
+    <string name="alert_language">Do you want to change the language to English?</string>
+    <string name="select_alert_language">Please select your language?</string>
+    <string name="no_lang">No</string>
+    <string name="yes_lang">Yes</string>
+    <string name="alert_title_lang">Alert!</string>
+    <string name="eng_lang">English</string>
+    <string name="arabic_lang">عربي</string>
+    <string name="en">en</string>
+    <string name="ar">ar</string>
+    <string name="select_alert_title_lang">Alert!</string>
+
+</resources>

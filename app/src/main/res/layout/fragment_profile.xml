@@ -40,12 +40,12 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tvProfile">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/appCompatImageView"
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivProfileImage"
                 android:layout_width="100dp"
                 android:layout_height="100dp"
+                app:shapeAppearanceOverlay="@style/roundedImageView"
                 android:layout_marginVertical="@dimen/eightdp"
-                android:background="@drawable/profile_image_round_background"
                 android:clipToOutline="true"
                 android:scaleType="centerCrop"
                 android:src="@drawable/placeholder_image"
@@ -56,14 +56,15 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <androidx.appcompat.widget.AppCompatImageView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:id="@+id/ivSelectImage"
+                android:layout_width="@dimen/thirtyDp"
+                android:layout_height="@dimen/thirtyDp"
                 android:src="@drawable/camera_background"
-                app:layout_constraintBottom_toBottomOf="@+id/appCompatImageView"
-                app:layout_constraintEnd_toEndOf="@+id/appCompatImageView"
+                app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
+                app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
                 app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/appCompatImageView"
-                app:layout_constraintTop_toTopOf="@+id/appCompatImageView"
+                app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
+                app:layout_constraintTop_toTopOf="@+id/ivProfileImage"
                 app:layout_constraintVertical_bias="1.0" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
@@ -87,8 +88,9 @@
             android:layout_marginTop="@dimen/fivedp"
             android:background="@drawable/profile_background"
             android:paddingHorizontal="@dimen/txt_seventeen"
+            android:hint="@string/full_name"
             android:paddingVertical="@dimen/txt_seventeen"
-            android:text="@string/full_name"
+            android:inputType="textPersonName"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.5"
             app:layout_constraintStart_toStartOf="parent"
@@ -100,7 +102,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="@dimen/txt_sixteen"
-            android:text="@string/full_name"
+            android:text="@string/e_mail"
             app:layout_constraintStart_toStartOf="@+id/etFullName"
             app:layout_constraintTop_toBottomOf="@+id/etFullName" />
 
@@ -111,7 +113,7 @@
             android:layout_marginHorizontal="@dimen/thirtyDp"
             android:layout_marginVertical="@dimen/txt_seventeen"
             android:background="@drawable/profile_background"
-            android:hint="@string/full_name"
+            android:hint="@string/e_mail"
             android:paddingHorizontal="@dimen/txt_seventeen"
             android:paddingVertical="@dimen/txt_seventeen"
             app:layout_constraintEnd_toEndOf="parent"
@@ -180,7 +182,7 @@
             android:layout_marginHorizontal="@dimen/thirtyDp"
             android:layout_marginVertical="@dimen/txt_sixteen"
             android:background="@drawable/button_background"
-            android:text="@string/continues"
+            android:text="@string/update_profile"
             android:textAllCaps="false"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
@@ -245,7 +247,7 @@
                     app:layout_constraintVertical_bias="0.5" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/tvLanguage"
+                    android:id="@+id/scLanguage"
                     style="@style/TextView.14sp.Black.Inter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -267,11 +269,11 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvLanguage"
+                    app:layout_constraintTop_toBottomOf="@+id/scLanguage"
                     app:layout_constraintVertical_bias="0.5" />
 
                 <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/tvNotification"
+                    android:id="@+id/scFingerPrint"
                     style="@style/TextView.14sp.Black.Inter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -279,7 +281,7 @@
                     android:thumb="@drawable/custom_thumb"
                     android:layout_marginHorizontal="@dimen/txt_sixteen"
                     android:gravity="start|center"
-                    android:text="@string/notification"
+                    android:text="@string/fingerprint_sensor"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
@@ -293,7 +295,7 @@
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvNotification"
+                    app:layout_constraintTop_toBottomOf="@+id/scFingerPrint"
                     app:layout_constraintVertical_bias="0.5" />
 
                 <androidx.appcompat.widget.AppCompatTextView
@@ -328,18 +330,44 @@
                     style="@style/TextView.14sp.Black.Inter"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:layout_marginHorizontal="@dimen/txt_sixteen"
+                    android:layout_marginVertical="@dimen/txt_sixteen"
                     android:drawableEnd="@drawable/ic_forword_arrow_icon"
+                    android:gravity="start|center"
+                    android:text="@string/terms_and_conditions"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/viewAppPolicy" />
+
+                <View
+                    android:id="@+id/viewLogout"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginTop="@dimen/tenDp"
+                    android:background="@color/light_black"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/tvTerms"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvLogout"
+                    style="@style/TextView.14sp.Black.Inter"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
                     android:layout_marginHorizontal="@dimen/txt_sixteen"
                     android:layout_marginVertical="@dimen/txt_sixteen"
                     android:gravity="start|center"
-                    android:text="@string/terms_and_conditions"
+                    android:text="@string/logout"
+                    android:textColor="@android:color/holo_red_dark"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewAppPolicy"
+                    app:layout_constraintTop_toBottomOf="@+id/viewLogout"
                     app:layout_constraintVertical_bias="0.5" />
-
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </androidx.cardview.widget.CardView>

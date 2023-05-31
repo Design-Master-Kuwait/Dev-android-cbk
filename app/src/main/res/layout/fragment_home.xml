@@ -3,12 +3,85 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         tools:context=".ui.deshboard.ui.home.HomeFragment">
 
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/ivMenu"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/twentyfivedp"
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+                android:src="@drawable/ic_menu_icon"
+                app:layout_constraintBottom_toBottomOf="@+id/tvTitle"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="@+id/tvTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvTitle"
+                style="@style/TextView.24sp.Blue.Akaya_Kanadaka"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/twentyfivedp"
+                android:layout_marginStart="@dimen/txt_thirteen"
+                android:layout_marginTop="@dimen/thirtyDp"
+                android:text="@string/test_app"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/ivMenu"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivImage"
+                android:layout_width="@dimen/img_sixty"
+                android:layout_height="@dimen/img_sixty"
+                android:layout_marginVertical="@dimen/thirtyDp"
+                android:background="@drawable/profile_image_round_background"
+                android:clipToOutline="true"
+                android:layout_marginStart="@dimen/thirtyDp"
+                android:scaleType="centerCrop"
+                android:src="@drawable/placeholder_image"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTitle"
+                app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvWishes"
+                style="@style/TextView.16sp.Black.Inter_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="@dimen/twentydp"
+                android:layout_marginStart="@dimen/txt_sixteen"
+                android:fontFamily="@font/akaya_kanadaka_regular"
+                android:text="@string/good_morning"
+                app:layout_constraintStart_toEndOf="@+id/ivImage"
+                app:layout_constraintTop_toTopOf="@+id/ivImage" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFullName"
+                style="@style/TextView.24sp.Black.Inter_Bold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/asta_sanghani"
+                android:textColor="@color/blue"
+                app:layout_constraintStart_toStartOf="@+id/tvWishes"
+                app:layout_constraintTop_toBottomOf="@+id/tvWishes" />
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/rvDailyNeeds"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/thirtyDp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFullName"
+                tools:listitem="@layout/item_parent_home" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 </layout>

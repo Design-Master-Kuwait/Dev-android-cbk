@@ -16,9 +16,9 @@ import javax.inject.Inject
 class DashboardDataSourceImpl @Inject constructor(
     private val apiService: ApiService,
 ) : DashboardRepository {
-    override suspend fun postProfileApi(auth: String): Resource<ProfileResponseModel> {
+    override suspend fun postProfileApi(): Resource<ProfileResponseModel> {
         return try {
-            val response = apiService.getUserProfileApi(auth)
+            val response = apiService.getUserProfileApi()
             if (response.isSuccessful) {
                 val list = response.body()
                 list.let {
@@ -46,9 +46,9 @@ class DashboardDataSourceImpl @Inject constructor(
         }
     }
 
-    override suspend fun postDashboardApi(auth: String): Resource<DashboardResponseModel> {
+    override suspend fun postDashboardApi(): Resource<DashboardResponseModel> {
         return try {
-            val response = apiService.getDashboardApi(auth)
+            val response = apiService.getDashboardApi()
             if (response.isSuccessful) {
                 val list = response.body()
                 list.let {

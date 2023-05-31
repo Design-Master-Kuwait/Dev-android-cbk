@@ -34,12 +34,10 @@ class MainViewModel @Inject constructor(
     val _dashBoardData: LiveData<Resource<DashboardResponseModel>>
         get() = dashBoardData
 
-    val auth: String = ""
-
-    fun getDashBoardApi(phone: String, pass: String) {
+    fun getDashBoardApi() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Utility.isNetworkAvailable(context)) {
-                val response = dashBoardUseCase.getDashBoardApi(auth)
+                val response = dashBoardUseCase.getDashBoardApi()
                 try {
                     dashBoardData.postValue(response)
                 } catch (ex: Exception) {
@@ -61,7 +59,7 @@ class MainViewModel @Inject constructor(
     fun getProfileApi() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Utility.isNetworkAvailable(context)) {
-                val response = dashBoardUseCase.getProfileApi(auth)
+                val response = dashBoardUseCase.getProfileApi()
                 try {
                     profileData.postValue(response)
                 } catch (ex: Exception) {

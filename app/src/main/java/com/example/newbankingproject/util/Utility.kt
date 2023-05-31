@@ -1,9 +1,18 @@
 package com.example.newbankingproject.util
 
+import android.app.Dialog
 import android.content.Context
+import android.graphics.Color
+import android.graphics.drawable.ColorDrawable
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.view.LayoutInflater
+import android.view.Window
+import android.widget.Toast
+import androidx.biometric.BiometricManager
+import com.example.newbankingproject.R
+import com.example.newbankingproject.databinding.DialogImageBinding
 
 class Utility {
     companion object {
@@ -34,6 +43,15 @@ class Utility {
                 }
             }
             return false
+        }
+
+        fun String.toastMessage(context: Context?) {
+            Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
+        }
+
+        fun isBiometricAvailable(context: Context): Boolean {
+            val biometricManager = BiometricManager.from(context)
+            return biometricManager.canAuthenticate() == BiometricManager.BIOMETRIC_SUCCESS
         }
     }
 }

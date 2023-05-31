@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/linAlertDialog"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/thirtyDp"
+        android:background="@drawable/alert_popup_bg">
+
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_title"
+            style="@style/TextView.14sp.Black.Inter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/thirtyDp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textColor="@color/black"
+            android:textDirection="locale"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="title" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/text_view_message"
+            style="@style/TextView.14sp.Black.Inter"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/tenDp"
+            android:gravity="center"
+            android:textAlignment="center"
+            android:textDirection="locale"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title"
+            tools:text="description" />
+
+
+        <View
+            android:id="@+id/viewTop"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:layout_marginTop="@dimen/tenDp"
+            android:background="@color/light_black"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_message"
+            tools:layout_editor_absoluteX="0dp"
+            tools:layout_editor_absoluteY="90dp" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_positive"
+            style="@style/TextView.16sp.Blue.Inter_Medium"
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:background="@color/blue"
+            android:paddingVertical="@dimen/tenDp"
+            android:text="@string/ok"
+            android:textAlignment="center"
+            android:textColor="@color/white"
+            android:textDirection="locale"
+            app:layout_constraintEnd_toStartOf="@+id/divMiddle"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTop" />
+
+        <View
+            android:id="@+id/divMiddle"
+            android:layout_width="1dp"
+            android:layout_height="0dp"
+            android:background="@color/light_black"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/viewTop" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/button_negative"
+            style="@style/TextView.16sp.Black.Inter_SemiBold"
+            android:layout_width="@dimen/_0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:paddingVertical="@dimen/tenDp"
+            android:text="@string/cancel"
+            android:textAlignment="center"
+            android:textDirection="locale"
+            android:textSize="@dimen/txt_sixteen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.5"
+            app:layout_constraintHorizontal_chainStyle="spread"
+            app:layout_constraintStart_toEndOf="@+id/divMiddle"
+            app:layout_constraintTop_toBottomOf="@+id/viewTop" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

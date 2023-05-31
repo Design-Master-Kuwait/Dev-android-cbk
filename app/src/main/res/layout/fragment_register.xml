@@ -132,6 +132,7 @@
                     android:layout_height="@dimen/_0dp"
                     android:background="@android:color/transparent"
                     android:gravity="start|center"
+                    android:inputType="phone"
                     android:hint="@string/phone_number"
                     android:maxLength="10"
                     android:paddingHorizontal="@dimen/tenDp"

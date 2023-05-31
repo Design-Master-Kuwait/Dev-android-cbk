@@ -1,0 +1,48 @@
+<resources>
+
+    <style name="font_bold">
+        <item name="android:fontFamily">@font/ge_ss_two_bold</item>
+    </style>
+
+    <style name="font_medium">
+        <item name="android:fontFamily">@font/ge_ss_two_medium</item>
+    </style>
+
+    <style name="font_regular">
+        <item name="android:fontFamily">@font/ge_ss_two_light</item>
+    </style>
+
+    <style name="font_bold_mon">
+        <item name="android:fontFamily">@font/ge_ss_two_bold</item>
+    </style>
+
+    <style name="font_medium_mon">
+        <item name="android:fontFamily">@font/ge_ss_two_medium</item>
+    </style>
+
+    <style name="font_semi_mon">
+        <item name="android:fontFamily">@font/ge_ss_two_bold</item>
+    </style>
+
+    <style name="font_regular_mon">
+        <item name="android:fontFamily">@font/ge_ss_two_light</item>
+    </style>
+
+
+    <style name="font_semi_inter">
+        <item name="android:fontFamily">@font/ge_ss_two_bold</item>
+    </style>
+
+    <style name="font_regular_inter">
+        <item name="android:fontFamily">@font/ge_ss_two_light</item>
+    </style>
+
+    <style name="font_regular_mon_number">
+        <item name="android:fontFamily">@font/ge_ss_two_light_en</item>
+    </style>
+
+    <style name="TextAppearance.App.Tooltip.RangeSlider" parent="TextAppearance.MaterialComponents.Tooltip">
+        <item name="android:textColor">@color/white</item>
+        <item name="fontFamily">@font/ge_ss_two_light</item>
+    </style>
+</resources>

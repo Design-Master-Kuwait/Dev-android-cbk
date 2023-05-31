@@ -30,6 +30,20 @@
             app:layout_constraintVertical_bias="0.43" />
 
         <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tvLanguage"
+            style="@style/TextView.24sp.Black.Inter_Bold"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/thirtyDp"
+            android:layout_marginTop="@dimen/thirtyDp"
+            android:drawableStart="@drawable/ic_language_icon"
+            android:drawablePadding="@dimen/tenDp"
+            android:text="@string/en"
+            android:textSize="@dimen/txt_sixteen"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <androidx.appcompat.widget.AppCompatTextView
             android:id="@+id/tvLogin"
             style="@style/TextView.24sp.Black.Inter_Bold"
             android:layout_width="match_parent"
