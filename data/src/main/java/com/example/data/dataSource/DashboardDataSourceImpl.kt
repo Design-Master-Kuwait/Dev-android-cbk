@@ -3,7 +3,6 @@ package com.example.data.dataSource
 import com.example.data.ApiService
 import com.example.data.model.deshboard.DashboardDataResponse
 import com.example.data.model.deshboard.ProfileData
-import com.example.data.utils.toApiFailure
 import com.example.domain.model.dashboard.DashboardData
 import com.example.domain.model.dashboard.DashboardProfileData
 import com.example.domain.model.dashboard.DashboardResponseModel
@@ -39,10 +38,8 @@ class DashboardDataSourceImpl @Inject constructor(
             } else {
                 Resource.Error(response.message())
             }
-        } catch (throwable: Throwable) {
-            throwable.toApiFailure().let { error ->
-                Resource.Error(error.toString())
-            }
+        } catch (throwable: Exception) {
+            Resource.Error(throwable.toString())
         }
     }
 
@@ -63,10 +60,8 @@ class DashboardDataSourceImpl @Inject constructor(
             } else {
                 Resource.Error(response.message())
             }
-        } catch (throwable: Throwable) {
-            throwable.toApiFailure().let { error ->
-                Resource.Error(error.toString())
-            }
+        } catch (throwable: java.lang.Exception) {
+            Resource.Error(throwable.toString())
         }
     }
 

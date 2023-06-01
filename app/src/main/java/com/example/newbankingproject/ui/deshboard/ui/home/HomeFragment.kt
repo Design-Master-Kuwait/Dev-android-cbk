@@ -2,7 +2,6 @@ package com.example.newbankingproject.ui.deshboard.ui.home
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -22,6 +21,7 @@ import com.example.newbankingproject.util.Utility.Companion.toastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**HomeFragment is used to elaborate the home screen preview*/
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
 
@@ -51,29 +51,29 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setViewData()
-        setOnClickListener()
         callObserver()
     }
 
+    /**setViewData is used to set data in view*/
     private fun setViewData() {
         binding.tvFullName.text = preference.getUserName() ?: context?.getString(R.string.guest)
         adapter = DashboardMainAdapter()
-        binding.rvDailyNeeds.adapter = adapter
-        binding.rvDailyNeeds.setHasFixedSize(true)
-        binding.rvDailyNeeds.layoutManager = LinearLayoutManager(context)
+        binding.rvDailyNeeds.apply {
+            adapter = adapter
+            setHasFixedSize(true)
+            layoutManager = LinearLayoutManager(context)
+        }
+
         if (preference.getProfileImage() != null)
             binding.ivImage.setImageURI(Uri.parse(preference.getProfileImage()))
     }
 
-    private fun setOnClickListener() {
-
-    }
-
+    /**callObserver is used to call observe for retrieve data*/
     private fun callObserver() {
         viewModel._dashBoardData.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Error -> {
-                    it.message?.toastMessage(context)
+                    it.message toastMessage context
                 }
 
                 is Resource.Success -> {
@@ -89,16 +89,12 @@ class HomeFragment : Fragment() {
         }
     }
 
+    /**setData is used to set the data which come from remote api*/
     private fun setData(data: DashboardResponseModel?) {
         dashBoardData.clear()
         data?.data?.let { dashBoardData.addAll(it) }
-        Log.d(TAG, "setData: $dashBoardData")
         adapter.updateData(dashBoardData)
         adapter.notifyDataSetChanged()
-    }
-
-    private fun View.setVisibility(isVisible: Boolean = false) {
-        this.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     override fun onDestroyView() {
@@ -106,7 +102,4 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 
-    companion object {
-        val TAG = HomeFragment::class.java.simpleName
-    }
 }

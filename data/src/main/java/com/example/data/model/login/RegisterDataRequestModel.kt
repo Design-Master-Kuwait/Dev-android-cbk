@@ -7,5 +7,4 @@ data class RegisterDataRequestModel(
     @SerializedName("phone") var phone: String? = null,
     @SerializedName("pwd") var pwd: String? = null,
     @SerializedName("role") var role: String? = null,
-) {
-}
+)

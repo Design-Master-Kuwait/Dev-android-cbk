@@ -1,7 +1,6 @@
 package com.example.newbankingproject.ui.deshboard.adapter
 
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.databinding.ObservableArrayList
@@ -13,7 +12,8 @@ import com.example.newbankingproject.databinding.ItemParentHomeBinding
 import com.example.newbankingproject.util.Constant.DAILY_NEEDS
 import com.example.newbankingproject.util.Constant.MONTH_SUMMERY
 
-class DashboardMainAdapter constructor() : RecyclerView.Adapter<DashboardViewHolder>() {
+/**DashboardMainAdapter is adapter class for main parents list*/
+class DashboardMainAdapter : RecyclerView.Adapter<DashboardViewHolder>() {
     lateinit var context: Context
     val data: ObservableArrayList<DashboardData> = ObservableArrayList()
 
@@ -43,15 +43,18 @@ class DashboardMainAdapter constructor() : RecyclerView.Adapter<DashboardViewHol
     }
 }
 
+/**DashboardViewHolder is view holder class for DashboardMainAdapter adapter class*/
 class DashboardViewHolder(var item: ItemParentHomeBinding) : RecyclerView.ViewHolder(item.root) {
     var dataList = ObservableArrayList<DashboardProfileData>()
 
+    /** bind is used to set data inside view holder class*/
     fun bind(data: DashboardData?, context: Context) {
         item.tvNeeds.text = data?.title.toString()
         data?.data?.let { dataList.addAll(it) }
         initializeAdapter(data, context)
     }
 
+    /**initializeAdapter is used to initialize the inner adapter class*/
     private fun initializeAdapter(data: DashboardData?, context: Context) {
         when (data?.type) {
             MONTH_SUMMERY -> {

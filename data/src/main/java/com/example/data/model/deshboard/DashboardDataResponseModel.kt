@@ -17,7 +17,6 @@ data class ProfileData(
     @SerializedName("increament") var increament: Int? = null,
 )
 
-
 data class DashboardDataResponse(
     @SerializedName("title") var title: String? = null,
     @SerializedName("type") var type: String? = null,

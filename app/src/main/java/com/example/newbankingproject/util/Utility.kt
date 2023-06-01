@@ -1,19 +1,21 @@
 package com.example.newbankingproject.util
 
-import android.app.Dialog
+import android.app.Activity
 import android.content.Context
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
+import android.content.Intent
+import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.view.LayoutInflater
-import android.view.Window
 import android.widget.Toast
 import androidx.biometric.BiometricManager
+import com.example.data.utils.KeyStorePreference
 import com.example.newbankingproject.R
-import com.example.newbankingproject.databinding.DialogImageBinding
+import com.example.newbankingproject.listener.AlertDialogInterface
+import com.example.newbankingproject.ui.login.LoginActivity
+import java.util.Locale
 
+/*Utility is used to get all necessary code*/
 class Utility {
     companion object {
         fun isNetworkAvailable(context: Context?): Boolean {
@@ -28,9 +30,11 @@ class Utility {
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_CELLULAR) -> {
                             return true
                         }
+
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_WIFI) -> {
                             return true
                         }
+
                         capabilities.hasTransport(NetworkCapabilities.TRANSPORT_ETHERNET) -> {
                             return true
                         }
@@ -45,8 +49,25 @@ class Utility {
             return false
         }
 
-        fun String.toastMessage(context: Context?) {
+        infix fun String?.toastMessage(context: Context?) {
             Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
+        }
+
+        /**changeLanguage is used to change the language and store in shared preference*/
+        fun Context.changeLanguage(context:Activity,preference: KeyStorePreference, language: String) {
+            var locale: Locale? = null
+            locale = Locale(language)
+            preference.storeLanguage(language)
+            if (locale != null) {
+                Locale.setDefault(locale)
+            }
+            val config = Configuration()
+            config.locale = locale
+            resources?.updateConfiguration(config, null)
+            val intent = Intent()
+            intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+            startActivity(intent)
+            context.finish()
         }
 
         fun isBiometricAvailable(context: Context): Boolean {

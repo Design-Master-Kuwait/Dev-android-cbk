@@ -6,6 +6,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.example.data.utils.KeyStorePreference
 import com.example.domain.utils.Resource
@@ -17,6 +18,7 @@ import com.example.newbankingproject.util.Utility.Companion.toastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/*RegistrationFragment is used to elaborate the registration page screen*/
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
 
@@ -40,16 +42,17 @@ class RegistrationFragment : Fragment() {
 
     }
 
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         setObservable()
         setOnClickListener()
     }
 
+    /** setOnClickListener is used to call set on click listeners for views
+     */
     private fun setOnClickListener() {
         binding.ivBack.setOnClickListener {
-            activity?.onBackPressedDispatcher?.onBackPressed()
+            Navigation.findNavController(requireView()).popBackStack()
         }
         binding.btnContinue.setOnClickListener {
             binding.progress.setVisibility(true)
@@ -64,6 +67,7 @@ class RegistrationFragment : Fragment() {
         }
     }
 
+    /**setObservable is used to call observer*/
     private fun setObservable() {
         viewModel._registerData.observe(viewLifecycleOwner) {
             when (it) {
@@ -93,6 +97,7 @@ class RegistrationFragment : Fragment() {
         this.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
+    /**setData is used to set data which come from api*/
     private fun setData(success: String?) {
         when (success) {
             Constant.NEW_USER_CREATED -> {
@@ -107,6 +112,7 @@ class RegistrationFragment : Fragment() {
     }
 
 
+    /**validation is used to validate the fields*/
     private fun validation(name: String, phone: String, password: String): Boolean {
         if (phone.isEmpty()) {
             getString(R.string.code_error).toastMessage(context)
@@ -122,15 +128,6 @@ class RegistrationFragment : Fragment() {
         }
         return true
     }
-
-//    private fun View.setVisibility(isVisible: Boolean = false) {
-//        this.visibility = if (isVisible) View.VISIBLE else View.GONE
-//    }
-//
-//
-//    private fun String.toastMessage() {
-//        Toast.makeText(context, this, Toast.LENGTH_SHORT).show()
-//    }
 
     override fun onDestroyView() {
         super.onDestroyView()

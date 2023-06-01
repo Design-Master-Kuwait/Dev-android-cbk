@@ -13,6 +13,7 @@ import com.example.newbankingproject.ui.deshboard.viewModel.MainViewModel
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
+/**MainActivity is class used to elaborate the profile and dashboard*/
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
@@ -35,7 +36,5 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         val navView = binding.navView
         navView.setupWithNavController(navController)
-
-
     }
 }

@@ -1,9 +1,8 @@
 package com.example.data.dataSource
 
+import com.example.data.ApiService
 import com.example.data.model.login.LoginDataRequestModel
 import com.example.data.model.login.RegisterDataRequestModel
-import com.example.data.ApiService
-import com.example.data.utils.toApiFailure
 import com.example.domain.model.LoginResponseModel
 import com.example.domain.model.RegisterResponseModel
 import com.example.domain.repository.LoginRepository
@@ -25,10 +24,8 @@ class LoginDataSourceImpl @Inject constructor(
             } else {
                 Resource.Error(response.message())
             }
-        } catch (throwable: Throwable) {
-            throwable.toApiFailure().let { error ->
-                Resource.Error(error.toString())
-            }
+        } catch (throwable: Exception) {
+            Resource.Error(throwable.message.toString())
         }
     }
 
@@ -49,10 +46,8 @@ class LoginDataSourceImpl @Inject constructor(
             } else {
                 Resource.Error(response.message())
             }
-        } catch (throwable: Throwable) {
-            throwable.toApiFailure().let { error ->
-                Resource.Error(error.toString())
-            }
+        } catch (throwable: java.lang.Exception) {
+            Resource.Error(throwable.message.toString())
         }
     }
 }

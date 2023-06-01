@@ -14,6 +14,7 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:supportsRtl="true"
         android:background="@drawable/login_background">
 
         <ProgressBar
@@ -80,6 +81,7 @@
                 android:layout_height="wrap_content"
                 android:background="@android:color/transparent"
                 android:gravity="start|center"
+                android:textAlignment="viewStart"
                 android:hint="@string/full_name"
                 android:paddingHorizontal="@dimen/txt_nineteen"
                 android:paddingVertical="@dimen/txt_seventeen" />
@@ -133,6 +135,7 @@
                     android:background="@android:color/transparent"
                     android:gravity="start|center"
                     android:inputType="phone"
+                    android:textAlignment="viewStart"
                     android:hint="@string/phone_number"
                     android:maxLength="10"
                     android:paddingHorizontal="@dimen/tenDp"
@@ -176,6 +179,7 @@
                 android:background="@android:color/transparent"
                 android:gravity="start|center"
                 android:hint="@string/password"
+                android:textAlignment="viewStart"
                 android:paddingHorizontal="@dimen/txt_nineteen"
                 android:paddingVertical="@dimen/txt_seventeen" />
         </androidx.cardview.widget.CardView>

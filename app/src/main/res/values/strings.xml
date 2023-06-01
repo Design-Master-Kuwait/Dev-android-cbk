@@ -59,4 +59,5 @@
     <string name="ar">ar</string>
     <string name="eng_lang">English</string>
     <string name="arabic_lang">عربي</string>
+    <string name="submit">submit</string>
 </resources>

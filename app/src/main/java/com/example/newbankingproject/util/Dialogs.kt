@@ -14,6 +14,7 @@ import com.example.newbankingproject.R
 import com.example.newbankingproject.databinding.DialogAlertBinding
 import com.example.newbankingproject.listener.AlertDialogInterface
 
+/**Dialogs  is responsible to show custom alert*/
 class Dialogs {
     companion object {
         fun showCustomAlert(
@@ -24,7 +25,6 @@ class Dialogs {
             noBtn: String,
             singleBtn: Boolean = false,
             isCancellable: Boolean? = true,
-            reverseFont: Boolean? = false, //for change language alert
             alertDialogInterface: AlertDialogInterface,
         ) {
             try {
@@ -35,30 +35,35 @@ class Dialogs {
                     R.layout.dialog_alert, null, false
                 )
                 dialog.setContentView(binding.root)
-                val lp: WindowManager.LayoutParams = WindowManager.LayoutParams()
-                lp.copyFrom(dialog.window?.attributes)
-                lp.width = WindowManager.LayoutParams.WRAP_CONTENT
-                lp.height = WindowManager.LayoutParams.WRAP_CONTENT
-                lp.gravity = Gravity.CENTER
-                dialog.window?.attributes = lp
-                dialog.window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
-                dialog.setCanceledOnTouchOutside(isCancellable ?: true)
-                dialog.setCancelable(isCancellable ?: true)
-
-                binding.textViewTitle.text = title
-                binding.textViewMessage.text = msg
-                binding.buttonNegative.text = noBtn
-                binding.buttonPositive.text = yesBtn
-
-                binding.buttonNegative.visibility = if (singleBtn) View.GONE else View.VISIBLE
-                binding.divMiddle.visibility = if (singleBtn) View.GONE else View.VISIBLE
-                binding.buttonNegative.setOnClickListener {
-                    dialog.dismiss()
-                    alertDialogInterface.onNoClick()
+                val lp: WindowManager.LayoutParams = WindowManager.LayoutParams().apply {
+                    copyFrom(dialog.window?.attributes)
+                    width = WindowManager.LayoutParams.WRAP_CONTENT
+                    height = WindowManager.LayoutParams.WRAP_CONTENT
+                    gravity = Gravity.CENTER
                 }
-                binding.buttonPositive.setOnClickListener {
-                    dialog.dismiss()
-                    alertDialogInterface.onYesClick()
+                dialog.apply {
+                    window?.attributes = lp
+                    window?.setBackgroundDrawable(ColorDrawable(Color.TRANSPARENT))
+                    setCanceledOnTouchOutside(isCancellable ?: true)
+                    setCancelable(isCancellable ?: true)
+
+                }
+                binding.apply {
+                    textViewTitle.text = title
+                    textViewMessage.text = msg
+                    buttonNegative.text = noBtn
+                    buttonPositive.text = yesBtn
+
+                    buttonNegative.visibility = if (singleBtn) View.GONE else View.VISIBLE
+                    divMiddle.visibility = if (singleBtn) View.GONE else View.VISIBLE
+                    buttonNegative.setOnClickListener {
+                        dialog.dismiss()
+                        alertDialogInterface.onNoClick()
+                    }
+                    buttonPositive.setOnClickListener {
+                        dialog.dismiss()
+                        alertDialogInterface.onYesClick()
+                    }
                 }
                 dialog.show()
             } catch (e: Exception) {

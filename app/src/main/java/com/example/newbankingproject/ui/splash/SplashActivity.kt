@@ -12,7 +12,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.data.utils.KeyStorePreference
 import com.example.newbankingproject.databinding.ActivitySplashBinding
-import com.example.newbankingproject.ui.biometric.BiometricActivity
 import com.example.newbankingproject.ui.deshboard.MainActivity
 import com.example.newbankingproject.ui.login.LoginActivity
 import com.example.newbankingproject.util.Utility
@@ -23,6 +22,7 @@ import java.util.Locale
 import java.util.concurrent.Executor
 import javax.inject.Inject
 
+/**SplashActivity is activity for splash screen*/
 @AndroidEntryPoint
 class SplashActivity : AppCompatActivity() {
     @Inject
@@ -42,6 +42,7 @@ class SplashActivity : AppCompatActivity() {
         initializeView()
     }
 
+    /**initializeBiometric is used to initialize the biometric authentication*/
     private fun initializeBiometric() {
         executor = ContextCompat.getMainExecutor(this)
         biometricPrompt = createBiometricPrompt()
@@ -54,6 +55,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    /**initializeView is used to initialize the views*/
     private fun initializeView() {
         lifecycleScope.launch {
             delay(DELAY)
@@ -64,14 +66,7 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkAuthentication() {
-        if (preference.isFingerPrintEnable()) {
-            val intent = Intent(this@SplashActivity, BiometricActivity::class.java)
-            startActivity(intent)
-            finish()
-        }
-    }
-
+    /**checkLoginStatus is used to check the status of login screen*/
     private fun checkLoginStatus() {
         if (preference.isLogin()) {
             Intent(this, MainActivity::class.java).apply { startActivity(this) }
@@ -83,8 +78,10 @@ class SplashActivity : AppCompatActivity() {
     }
 
 
+    /**createBiometricPrompt is used to create  the biometric prompt*/
     private fun createBiometricPrompt() = BiometricPrompt(this, executor, authenticationCallback)
 
+    /**requestBiometricPermission is used to request the biometric permissions*/
     private fun requestBiometricPermission() {
         val permission = Manifest.permission.USE_BIOMETRIC
         val requestCode = 123
@@ -100,11 +97,13 @@ class SplashActivity : AppCompatActivity() {
         }
     }
 
+    /**showBiometricPrompt is used to show biometric prompt*/
     private fun showBiometricPrompt() {
         // Display the biometric prompt
         biometricPrompt.authenticate(promptInfo)
     }
 
+    /**createPromptInfo is used to create prompt info*/
     private fun createPromptInfo() = BiometricPrompt.PromptInfo.Builder()
         .setTitle("Biometric Authentication")
         .setSubtitle("Authenticate using your fingerprint or face")
@@ -127,19 +126,22 @@ class SplashActivity : AppCompatActivity() {
                 "Authentication error: $errString",
                 Toast.LENGTH_SHORT
             ).show()
+            Intent(this@SplashActivity, LoginActivity::class.java).apply { startActivity(this) }
         }
 
         override fun onAuthenticationFailed() {
             // Biometric authentication failed
             Toast.makeText(applicationContext, "Authentication failed", Toast.LENGTH_SHORT).show()
+            Intent(this@SplashActivity, LoginActivity::class.java).apply { startActivity(this) }
             finishAffinity()
         }
     }
 
+    /**setLocale is used to set the locale*/
     private fun setLocale() {
         if (preference.getLanguage() != null) {
             val myLocale =
-                Locale(preference.getLanguage())
+                Locale(preference.getLanguage().toString())
             val res = this.resources
             val conf = res.configuration
             conf.locale = myLocale

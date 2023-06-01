@@ -1,8 +1,9 @@
 package com.example.newbankingproject.ui.login.fragment
 
 import android.content.Intent
+import android.content.Intent.FLAG_ACTIVITY_NEW_TASK
+import android.content.res.Configuration
 import android.os.Bundle
-import android.os.LocaleList
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -42,11 +43,9 @@ class LoginScreenFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?,
     ): View {
-
         _binding = FragmentLoginBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -56,11 +55,13 @@ class LoginScreenFragment : Fragment() {
         setObservable()
     }
 
+    /**initializeView is used to initialize the view*/
     private fun initializeView() {
         binding.tvLanguage.text = keyStorePreference.getLanguage()
     }
 
 
+    /** validation is used to validate the phone and password field*/
     private fun validation(phone: String, password: String): Boolean {
         binding.progress.setVisibility(false)
         if (phone.isEmpty()) {
@@ -74,6 +75,7 @@ class LoginScreenFragment : Fragment() {
         return true
     }
 
+    /**setOnClickListener is used to call setOnCLickListeners for views*/
     private fun setOnClickListener() {
         binding.btnContinue.setOnClickListener {
             binding.progress.setVisibility(true)
@@ -92,6 +94,7 @@ class LoginScreenFragment : Fragment() {
         }
     }
 
+    /**showChangeLanguageAlert is used to show alert box for change the language*/
     private fun showChangeLanguageAlert() {
         Dialogs.showCustomAlert(
             activity = requireActivity(),
@@ -99,65 +102,48 @@ class LoginScreenFragment : Fragment() {
             msg = resources.getString(R.string.select_alert_language),
             yesBtn = resources.getString(R.string.eng_lang),
             noBtn = resources.getString(R.string.arabic_lang),
-            reverseFont = true,
             alertDialogInterface = object : AlertDialogInterface {
                 override fun onYesClick() {
-                    englishLanguage()
+                    changeLanguage("en")
                 }
 
                 override fun onNoClick() {
-                    arabicLanguage()
+                    changeLanguage("ar")
                 }
             })
     }
 
-    fun changeLanguage() {
-        if (keyStorePreference.getLanguage() == "en") {
-            arabicLanguage()
-        } else {
-            englishLanguage()
+
+    /**changeLanguage is used to change the language*/
+    fun changeLanguage(language: String) {
+        var locale: Locale? = null
+        if (language == "en") {
+            locale = Locale("en")
+            keyStorePreference.storeLanguage("en")
+        } else if (language.equals("ar")) {
+            locale = Locale("ar")
+            keyStorePreference.storeLanguage("ar")
         }
-    }
-
-    private fun arabicLanguage() {
-        keyStorePreference.storeLanguage("ar")
-        setLocale()
-    }
-
-    private fun englishLanguage() {
-        keyStorePreference.storeLanguage("en")
-        setLocale()
-    }
-
-    private fun setLocale(removeAllPrevActivities: Boolean = true) {
-        val locale: Locale = resources.configuration.locale
-
-        val res = resources
-        val dm = res.displayMetrics
-        val conf = res.configuration
-
-        val localeList = LocaleList(locale)
-        LocaleList.setDefault(localeList)
-        conf.setLocales(localeList)
-
-        conf.setLayoutDirection(locale)
-        res.updateConfiguration(conf, dm)
-        if (removeAllPrevActivities) {
-            activity?.finishAffinity()
-        }
-        Intent(context, LoginActivity::class.java).apply { startActivity(this) }
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        activity?.resources?.updateConfiguration(config, null)
+        val intent = Intent(context, LoginActivity::class.java)
+        intent.flags = FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
         activity?.finish()
     }
 
+    /**setObservable is used to set the observer*/
     private fun setObservable() {
         viewModel._loginData.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Error -> {
-                    binding.progress.setVisibility(false)
+                    binding.progress setVisibility false
                     if (it.message?.contains("Unauthorized", true) == true) {
-                        context?.getString(R.string.invalid)?.toastMessage(context)
+                        context?.getString(R.string.invalid) toastMessage context
                     } else {
-                        it.message?.toastMessage(context)
+                        it.message toastMessage context
                     }
                 }
 
@@ -174,13 +160,13 @@ class LoginScreenFragment : Fragment() {
                 }
 
                 is Resource.Loading -> {
-                    binding.progress.setVisibility(true)
+                    binding.progress setVisibility true
                 }
             }
         }
     }
 
-    private fun View.setVisibility(isVisible: Boolean = false) {
+    private infix fun View.setVisibility(isVisible: Boolean) {
         this.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 

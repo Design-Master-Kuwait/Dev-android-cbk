@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.domain.model.dashboard.DashboardProfileData
 import com.example.newbankingproject.databinding.ItemDateBinding
 
+/**MonthSummeryAdapter is used to set monthly summery adapter list*/
 class MonthSummeryAdapter constructor(
     val data: ObservableArrayList<DashboardProfileData>,
 ) : RecyclerView.Adapter<MonthSummeryViewHolder>() {
@@ -34,6 +35,7 @@ class MonthSummeryAdapter constructor(
     }
 }
 
+/**MonthSummeryViewHolder is view holder class which elaborate the views for MonthSummeryAdapter adapter class */
 class MonthSummeryViewHolder(var item: ItemDateBinding) : RecyclerView.ViewHolder(item.root) {
     fun bind(data: DashboardProfileData?) {
         item.apply {

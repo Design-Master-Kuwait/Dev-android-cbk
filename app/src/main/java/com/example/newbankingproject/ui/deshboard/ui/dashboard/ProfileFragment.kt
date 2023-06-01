@@ -1,15 +1,14 @@
 package com.example.newbankingproject.ui.deshboard.ui.dashboard
 
-import android.app.Dialog
+import android.app.Activity
 import android.content.Intent
+import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.os.LocaleList
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.Window
 import android.widget.Toast
 import androidx.activity.result.PickVisualMediaRequest
 import androidx.activity.result.contract.ActivityResultContracts
@@ -20,7 +19,6 @@ import com.example.data.utils.KeyStorePreference
 import com.example.domain.model.dashboard.ProfileResponseModel
 import com.example.domain.utils.Resource
 import com.example.newbankingproject.R
-import com.example.newbankingproject.databinding.DialogImageBinding
 import com.example.newbankingproject.databinding.FragmentProfileBinding
 import com.example.newbankingproject.listener.AlertDialogInterface
 import com.example.newbankingproject.ui.deshboard.MainActivity
@@ -33,6 +31,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import javax.inject.Inject
 
+/**ProfileFragment is fragment class which elaborate the profile*/
 @AndroidEntryPoint
 class ProfileFragment : Fragment() {
 
@@ -48,6 +47,7 @@ class ProfileFragment : Fragment() {
 
     var imageUri: Uri? = null
 
+    /** getContent is use to return registerForActivityResult */
     private val getContent =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
             // Handle the returned Uri
@@ -79,6 +79,7 @@ class ProfileFragment : Fragment() {
         callObserver()
     }
 
+    /**callObserver is used to call the observers*/
     private fun callObserver() {
         viewModel._profileData.observe(viewLifecycleOwner) {
             when (it) {
@@ -98,11 +99,13 @@ class ProfileFragment : Fragment() {
         }
     }
 
+    /**setRemoteData is used to set the data which come from remote*/
     private fun setRemoteData(data: ProfileResponseModel?) {
         Log.d(TAG, "setRemoteData: $data")
 
     }
 
+    /**setData is used to set the data from shared preference*/
     private fun setData() {
         binding.etFullName.setText(preference.getUserName() ?: "")
         binding.etEmail.setText(preference.getEmail() ?: "")
@@ -114,6 +117,7 @@ class ProfileFragment : Fragment() {
         binding.scFingerPrint.isChecked = preference.isFingerPrintEnable()
     }
 
+    /**setOnClickListener is used to setup click listeners*/
     private fun setOnClickListener() {
         binding.ivBack.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
@@ -128,23 +132,68 @@ class ProfileFragment : Fragment() {
         binding.ivSelectImage.setOnClickListener {
             choosePhotoFromGallery()
         }
-        binding.scLanguage.setOnCheckedChangeListener { compoundButton, isChecked ->
-            showChangeLanguageAlert()
+        binding.scLanguage.setOnCheckedChangeListener { _, _ ->
+            showChangeLanguageAlert(requireActivity(), preference = preference)
+
         }
-        binding.scFingerPrint.setOnCheckedChangeListener { compoundButton, isChecked ->
+        binding.scFingerPrint.setOnCheckedChangeListener { _, isChecked ->
             checkBiometric(isChecked)
         }
 
     }
 
+    private fun showChangeLanguageAlert(activity: Activity, preference: KeyStorePreference) {
+        Dialogs.showCustomAlert(
+            activity = activity,
+            title = activity.getString(R.string.select_alert_title_lang),
+            msg = activity.resources.getString(R.string.select_alert_language),
+            yesBtn = activity.resources.getString(R.string.eng_lang),
+            noBtn = activity.resources.getString(R.string.arabic_lang),
+            alertDialogInterface = object : AlertDialogInterface {
+                override fun onYesClick() {
+                    changeLanguage("en")
+                }
+
+                override fun onNoClick() {
+                    changeLanguage("ar")
+                }
+            })
+    }
+
+    /**changeLanguage is used to change the language*/
+    fun changeLanguage(language: String) {
+        var locale: Locale? = null
+        locale = Locale(language)
+        preference.storeLanguage(language)
+        Locale.setDefault(locale)
+        val config = Configuration()
+        config.locale = locale
+        activity?.resources?.updateConfiguration(config, null)
+        val intent = Intent(context, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        startActivity(intent)
+        activity?.finish()
+    }
+
+    private fun refreshActivity() {
+        Intent(context, MainActivity::class.java).apply { startActivity(this) }
+    }
+
+    /**checkBiometric is used to check the biometric functionality
+     * - is it support your device or not
+     * */
     private fun checkBiometric(isChecked: Boolean) {
         if (Utility.isBiometricAvailable(context = requireContext())) {
             preference.storeFingerPrint(isChecked)
         } else {
-            Toast.makeText(context, "Biometric authentication is not available", Toast.LENGTH_SHORT).show()
+            binding.scFingerPrint.isChecked = false
+            binding.scFingerPrint.isEnabled = false
+            Toast.makeText(context, "Biometric authentication is not available", Toast.LENGTH_SHORT)
+                .show()
         }
     }
 
+    /**clearPreferenceAndMoveToLogin is used clear the shared preference and move to login page*/
     private fun clearPreferenceAndMoveToLogin() {
         preference.getClear()
         Intent(context, LoginActivity::class.java).apply {
@@ -154,6 +203,7 @@ class ProfileFragment : Fragment() {
         activity?.finish()
     }
 
+    /**saveDataInPreference is used to save data inside the shared preference*/
     private fun saveDataInPreference() {
         val name = binding.etFullName.text.toString()
         val email = binding.etEmail.text.toString()
@@ -167,47 +217,19 @@ class ProfileFragment : Fragment() {
             .show()
     }
 
-    private fun showImageDialog() {
-        val dialog = Dialog(requireContext()).apply {
-            requestWindowFeature(Window.FEATURE_NO_TITLE);
-            setCancelable(true)
-        }
-        val binding = DialogImageBinding.inflate(LayoutInflater.from(context), null, false)
-        dialog.setContentView(binding.root)
-        binding.cvCamera.setOnClickListener {
-            dialog.dismiss()
-        }
-        binding.cvGallery.setOnClickListener {
-            dialog.dismiss()
-        }
-        binding.ivClose.setOnClickListener {
-            dialog.dismiss()
-        }
-        dialog.show()
-    }
-
-
+    /**choosePhotoFromGallery is used to choose the photo from gallery*/
     private fun choosePhotoFromGallery() {
         getContent.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
     }
 
-    private fun showChangeLanguageAlert() {
-        Dialogs.showCustomAlert(
-            activity = requireActivity(),
-            title = getString(R.string.alert_title_lang),
-            msg = resources.getString(R.string.alert_language),
-            yesBtn = resources.getString(R.string.yes_lang),
-            noBtn = resources.getString(R.string.no_lang),
-            reverseFont = true,
-            alertDialogInterface = object : AlertDialogInterface {
-                override fun onYesClick() {
-                    changeLanguage()
-                    Intent(context, MainActivity::class.java).apply { startActivity(this) }
-                }
-
-                override fun onNoClick() {
-                }
-            })
+    /**requestToReload is used to request to reload the activity*/
+    private fun requestToReload() {
+        Intent(context, LoginActivity::class.java).apply {
+            flags = Intent.FLAG_ACTIVITY_NEW_TASK
+        }.apply {
+            startActivity(this)
+        }
+        activity?.finish()
     }
 
     override fun onDestroyView() {
@@ -215,42 +237,7 @@ class ProfileFragment : Fragment() {
         _binding = null
     }
 
-    fun changeLanguage() {
-        if (preference.getLanguage() == "en") {
-            arabicLanguage()
-        } else {
-            englishLanguage()
-        }
-    }
-
-    private fun arabicLanguage() {
-        preference.storeLanguage("ar")
-        setLocale()
-    }
-
-    private fun englishLanguage() {
-        preference.storeLanguage("en")
-        setLocale()
-    }
-
-    private fun setLocale() {
-        val locale: Locale = resources.configuration.locale
-
-        val res = resources
-        val dm = res.displayMetrics
-        val conf = res.configuration
-
-        val localeList = LocaleList(locale)
-        LocaleList.setDefault(localeList)
-        conf.setLocales(localeList)
-
-        conf.setLayoutDirection(locale)
-        res.updateConfiguration(conf, dm)
-    }
-
     companion object {
         val TAG: String = ProfileFragment::class.java.simpleName
-        const val GALLERY_CODE = 1001
-        val PHOTO_CODE = 1000
     }
 }

@@ -19,7 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
-
+/**MainViewModel is view model class is used for call data from usecase*/
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val dashBoardUseCase: DashBoardUseCase,
@@ -34,6 +34,7 @@ class MainViewModel @Inject constructor(
     val _dashBoardData: LiveData<Resource<DashboardResponseModel>>
         get() = dashBoardData
 
+    /**getDashBoardApi is used to call dashboard api*/
     fun getDashBoardApi() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Utility.isNetworkAvailable(context)) {
@@ -51,11 +52,12 @@ class MainViewModel @Inject constructor(
         }
     }
 
-
+    /** coroutineExceptionHandler is used to handle the exceptions in coroutine*/
     private val coroutineExceptionHandler = CoroutineExceptionHandler { _, throwable ->
         throwable.printStackTrace()
     }
 
+    /**getProfileApi is used to call the profile api*/
     fun getProfileApi() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Utility.isNetworkAvailable(context)) {
@@ -79,6 +81,6 @@ class MainViewModel @Inject constructor(
 
 
     companion object {
-        val TAG: String = MainViewModel::class.java.simpleName
+        private val TAG: String = MainViewModel::class.java.simpleName
     }
 }

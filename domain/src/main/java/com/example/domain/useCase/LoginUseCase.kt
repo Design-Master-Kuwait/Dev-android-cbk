@@ -22,6 +22,4 @@ class LoginUseCase @Inject constructor(
     ): Resource<RegisterResponseModel> {
         return repository.postRegisterApi(name, phone, pwd, role)
     }
-
-
 }

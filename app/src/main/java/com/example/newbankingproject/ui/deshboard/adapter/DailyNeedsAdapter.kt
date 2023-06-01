@@ -9,6 +9,7 @@ import com.example.domain.model.dashboard.DashboardProfileData
 import com.example.newbankingproject.databinding.ItemDailyNeedsBinding
 import com.example.newbankingproject.util.Constant
 
+/** DailyNeedsAdapter is adapter class for daily needs list*/
 class DailyNeedsAdapter constructor(
     val data: ObservableArrayList<DashboardProfileData>,
     val type: String?,
@@ -36,6 +37,7 @@ class DailyNeedsAdapter constructor(
     }
 }
 
+/**DailyNeedsViewHolder is view holder class for DailyNeedsAdapter recycler view */
 class DailyNeedsViewHolder(var item: ItemDailyNeedsBinding) : RecyclerView.ViewHolder(item.root) {
     fun bind(data: DashboardProfileData?, type: String?) {
         item.apply {

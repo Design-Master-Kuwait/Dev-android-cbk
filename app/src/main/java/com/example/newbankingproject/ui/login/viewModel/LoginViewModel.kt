@@ -19,6 +19,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
+/**LoginViewModel is responsible to handle the apis and data for login screen*/
 @HiltViewModel
 class LoginViewModel @Inject constructor(
     @ApplicationContext var context: Context?,
@@ -35,6 +36,7 @@ class LoginViewModel @Inject constructor(
 
     val customer = "Customer"
 
+    /**postAuthApi is used to call the post auth api*/
     fun postAuthApi(phone: String, pass: String) {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Utility.isNetworkAvailable(context)) {
@@ -57,6 +59,7 @@ class LoginViewModel @Inject constructor(
         throwable.printStackTrace()
     }
 
+    /**postRegisterApi is used to call the post registration api*/
     fun postRegisterApi(name: String, phone: String, pass: String, role: String = customer) {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Utility.isNetworkAvailable(context)) {
