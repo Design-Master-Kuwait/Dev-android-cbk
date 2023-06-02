@@ -109,15 +109,13 @@ class ProfileFragment : Fragment() {
 
     /**setRemoteData is used to set the data which come from remote*/
     private fun setRemoteData(data: ProfileResponseModel?) {
-        Log.d(TAG, "setRemoteData: $data")
-
+        binding.etFullName.setText(data?.data?.name?: preference.getUserName() ?:"")
+        binding.etEmail.setText(data?.data?.email ?: preference.getEmail() ?: "")
+        binding.etPhoneNumber.setText(data?.data?.phone ?: preference.getPhoneNumber() ?: "")
     }
 
     /**setData is used to set the data from shared preference*/
     private fun setData() {
-        binding.etFullName.setText(preference.getUserName() ?: "")
-        binding.etEmail.setText(preference.getEmail() ?: "")
-        binding.etPhoneNumber.setText(preference.getPhoneNumber() ?: "")
         if (preference.getProfileImage() != null) {
             binding.ivProfileImage.setImageURI(Uri.parse(preference.getProfileImage()))
         }
