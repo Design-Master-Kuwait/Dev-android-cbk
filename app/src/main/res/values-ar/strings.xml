@@ -58,5 +58,7 @@
     <string name="en">en</string>
     <string name="ar">ar</string>
     <string name="select_alert_title_lang">Alert!</string>
+    <string name="submit">يُقدِّم</string>
+    <string name="please_autanticate_yourself">الرجاء المصادقة على نفسك</string>
 
 </resources>
