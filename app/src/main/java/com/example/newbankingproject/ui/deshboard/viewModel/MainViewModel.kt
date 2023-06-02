@@ -34,7 +34,7 @@ class MainViewModel @Inject constructor(
     val _dashBoardData: LiveData<Resource<DashboardResponseModel>>
         get() = dashBoardData
 
-    /**getDashBoardApi is used to call dashboard api*/
+    /**getDashBoardApi is used to call profile api*/
     fun getDashBoardApi() {
         viewModelScope.launch(Dispatchers.IO + coroutineExceptionHandler) {
             if (Utility.isNetworkAvailable(context)) {
@@ -43,7 +43,6 @@ class MainViewModel @Inject constructor(
                     dashBoardData.postValue(response)
                 } catch (ex: Exception) {
                     dashBoardData.postValue(Resource.Error(ex.message.toString()))
-                    Log.e(TAG, "postAuthApi: ${ex.message} + ${response.message} ")
                 }
             } else {
                 dashBoardData.postValue(context?.getString(R.string.internetIsNotAvailable)

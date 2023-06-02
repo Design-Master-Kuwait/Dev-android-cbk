@@ -1,15 +1,12 @@
 package com.example.data.di
 
-import android.content.Context
 import com.example.data.ApiService
 import com.example.data.utils.Constant
 import com.example.data.utils.KeyStorePreference
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
-import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
-import okhttp3.Cache
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -21,6 +18,7 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class NetworkModule {
+
     @Singleton
     @Provides
     fun provideRetrofit(
@@ -40,15 +38,14 @@ class NetworkModule {
     @Provides
     @Singleton
     fun providesOkHttpClient(
-        @ApplicationContext context: Context,
         preference: KeyStorePreference,
     ): OkHttpClient {
-        val cacheSize = (5 * 1024 * 1024).toLong()
-        val mCache = Cache(context.cacheDir, cacheSize)
+//        val cacheSize = (5 * 1024 * 1024).toLong()
+//        val mCache = Cache(context.cacheDir, cacheSize)
         val interceptor = HttpLoggingInterceptor()
         interceptor.level = HttpLoggingInterceptor.Level.BODY
         val client = OkHttpClient.Builder()
-            .cache(mCache) // make your app offline-friendly without a database!
+//            .cache(mCache) // make your app offline-friendly without a database!
             .connectTimeout(60, TimeUnit.SECONDS)
             .writeTimeout(60, TimeUnit.SECONDS)
             .readTimeout(60, TimeUnit.SECONDS)

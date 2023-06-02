@@ -13,9 +13,9 @@ import com.example.newbankingproject.util.Constant.DAILY_NEEDS
 import com.example.newbankingproject.util.Constant.MONTH_SUMMERY
 
 /**DashboardMainAdapter is adapter class for main parents list*/
-class DashboardMainAdapter : RecyclerView.Adapter<DashboardViewHolder>() {
+class DashboardMainAdapter(val data: ObservableArrayList<DashboardData?>) :
+    RecyclerView.Adapter<DashboardViewHolder>() {
     lateinit var context: Context
-    val data: ObservableArrayList<DashboardData> = ObservableArrayList()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DashboardViewHolder {
         context = parent.context
@@ -26,11 +26,6 @@ class DashboardMainAdapter : RecyclerView.Adapter<DashboardViewHolder>() {
                 false
             )
         )
-    }
-
-    fun updateData( data: ObservableArrayList<DashboardData>){
-        this.data.clear()
-        this.data.addAll(data)
     }
 
     override fun onBindViewHolder(holder: DashboardViewHolder, position: Int) {

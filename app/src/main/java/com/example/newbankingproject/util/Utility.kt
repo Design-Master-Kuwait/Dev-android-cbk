@@ -7,12 +7,10 @@ import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
+import android.view.View
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import com.example.data.utils.KeyStorePreference
-import com.example.newbankingproject.R
-import com.example.newbankingproject.listener.AlertDialogInterface
-import com.example.newbankingproject.ui.login.LoginActivity
 import java.util.Locale
 
 /*Utility is used to get all necessary code*/
@@ -54,7 +52,11 @@ class Utility {
         }
 
         /**changeLanguage is used to change the language and store in shared preference*/
-        fun Context.changeLanguage(context:Activity,preference: KeyStorePreference, language: String) {
+        fun Context.changeLanguage(
+            context: Activity,
+            preference: KeyStorePreference,
+            language: String,
+        ) {
             var locale: Locale? = null
             locale = Locale(language)
             preference.storeLanguage(language)

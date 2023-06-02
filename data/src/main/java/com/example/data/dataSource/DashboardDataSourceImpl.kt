@@ -1,5 +1,6 @@
 package com.example.data.dataSource
 
+import android.util.Log
 import com.example.data.ApiService
 import com.example.data.model.deshboard.DashboardDataResponse
 import com.example.data.model.deshboard.ProfileData
@@ -36,9 +37,11 @@ class DashboardDataSourceImpl @Inject constructor(
                     )
                 }
             } else {
+                Log.e(TAG, "postProfileApi: ${response.message()}")
                 Resource.Error(response.message())
             }
         } catch (throwable: Exception) {
+            Log.e(TAG, "postProfileApi: ${throwable.message}")
             Resource.Error(throwable.toString())
         }
     }
@@ -58,9 +61,11 @@ class DashboardDataSourceImpl @Inject constructor(
                     )
                 }
             } else {
+                Log.e(TAG, "postDashboardApi: $response.message()")
                 Resource.Error(response.message())
             }
         } catch (throwable: java.lang.Exception) {
+            Log.e(TAG, "postDashboardApi: ${throwable.message}")
             Resource.Error(throwable.toString())
         }
     }
@@ -98,5 +103,9 @@ class DashboardDataSourceImpl @Inject constructor(
             }
         }
         return list
+    }
+
+    companion object {
+        val TAG: String? = DashboardDataSourceImpl::class.java.simpleName
     }
 }

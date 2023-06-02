@@ -72,12 +72,12 @@ class RegistrationFragment : Fragment() {
         viewModel._registerData.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Error -> {
-                    binding.progress.setVisibility(false)
-                    it.message?.toastMessage(context)
+                    binding.progress setVisibility false
+                    it.message toastMessage context
                 }
 
                 is Resource.Success -> {
-                    binding.progress.setVisibility(false)
+                    binding.progress setVisibility false
 
                     if (it.data?.success != null) {
                         setData(it.data?.success)
@@ -85,7 +85,7 @@ class RegistrationFragment : Fragment() {
                 }
 
                 is Resource.Loading -> {
-                    binding.progress.setVisibility(true)
+                    binding.progress setVisibility true
                 }
 
             }
@@ -93,7 +93,7 @@ class RegistrationFragment : Fragment() {
 
     }
 
-    private fun View.setVisibility(isVisible: Boolean = false) {
+    private infix fun View.setVisibility(isVisible: Boolean) {
         this.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
@@ -101,12 +101,12 @@ class RegistrationFragment : Fragment() {
     private fun setData(success: String?) {
         when (success) {
             Constant.NEW_USER_CREATED -> {
-                success.toastMessage(context)
+                success toastMessage context
                 findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
             }
 
             Constant.USERNAME_ALREADY_TAKEN -> {
-                success.toastMessage(context)
+                success toastMessage context
             }
         }
     }
@@ -115,15 +115,15 @@ class RegistrationFragment : Fragment() {
     /**validation is used to validate the fields*/
     private fun validation(name: String, phone: String, password: String): Boolean {
         if (phone.isEmpty()) {
-            getString(R.string.code_error).toastMessage(context)
+            getString(R.string.code_error) toastMessage context
             return false
         }
         if (name.isEmpty()) {
-            getString(R.string.code_error).toastMessage(context)
+            getString(R.string.code_error) toastMessage context
             return false
         }
         if (password.isEmpty()) {
-            getString(R.string.phone_error).toastMessage(context)
+            getString(R.string.phone_error) toastMessage context
             return false
         }
         return true

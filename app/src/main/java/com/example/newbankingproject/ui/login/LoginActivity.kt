@@ -26,9 +26,9 @@ class LoginActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment_content_login) as NavHostFragment
         navHostFragment.navController
-
     }
 
+    @Deprecated("Deprecated in Java")
     override fun onBackPressed() {
         super.onBackPressed()
         finishAffinity()

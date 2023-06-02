@@ -1,4 +1,4 @@
-package com.example.newbankingproject.ui.deshboard.ui.dashboard
+package com.example.newbankingproject.ui.deshboard.ui.profile
 
 import android.app.Activity
 import android.content.Intent
@@ -68,6 +68,7 @@ class ProfileFragment : Fragment() {
     ): View {
         _binding = FragmentProfileBinding.inflate(inflater, container, false)
         val root: View = binding.root
+        binding.progress setVisibility true
         viewModel.getProfileApi()
         return root
     }
@@ -84,19 +85,26 @@ class ProfileFragment : Fragment() {
         viewModel._profileData.observe(viewLifecycleOwner) {
             when (it) {
                 is Resource.Error -> {
-                    it.message?.toastMessage(context)
+                    binding.progress setVisibility false
+                    it.message toastMessage context
                 }
 
                 is Resource.Success -> {
                     if (it.data != null) {
                         setRemoteData(it.data)
                     }
+                    binding.progress setVisibility false
                 }
 
                 is Resource.Loading -> {
+                    binding.progress setVisibility true
                 }
             }
         }
+    }
+
+    private infix fun View.setVisibility(isVisible: Boolean) {
+        this.visibility = if (isVisible) View.VISIBLE else View.GONE
     }
 
     /**setRemoteData is used to set the data which come from remote*/
@@ -133,16 +141,16 @@ class ProfileFragment : Fragment() {
             choosePhotoFromGallery()
         }
         binding.scLanguage.setOnCheckedChangeListener { _, _ ->
-            showChangeLanguageAlert(requireActivity(), preference = preference)
-
+            showChangeLanguageAlert(requireActivity())
         }
         binding.scFingerPrint.setOnCheckedChangeListener { _, isChecked ->
+            Toast.makeText(context, if(isChecked)"Fingerprint Authentication : Enabled" else "Fingerprint Authentication : Disabled", Toast.LENGTH_SHORT).show()
             checkBiometric(isChecked)
         }
 
     }
 
-    private fun showChangeLanguageAlert(activity: Activity, preference: KeyStorePreference) {
+    private fun showChangeLanguageAlert(activity: Activity) {
         Dialogs.showCustomAlert(
             activity = activity,
             title = activity.getString(R.string.select_alert_title_lang),
@@ -162,21 +170,21 @@ class ProfileFragment : Fragment() {
 
     /**changeLanguage is used to change the language*/
     fun changeLanguage(language: String) {
-        var locale: Locale? = null
+        val locale: Locale?
         locale = Locale(language)
         preference.storeLanguage(language)
         Locale.setDefault(locale)
         val config = Configuration()
         config.locale = locale
         activity?.resources?.updateConfiguration(config, null)
+        refreshActivity()
+    }
+
+    private fun refreshActivity() {
         val intent = Intent(context, MainActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_NEW_TASK
         startActivity(intent)
         activity?.finish()
-    }
-
-    private fun refreshActivity() {
-        Intent(context, MainActivity::class.java).apply { startActivity(this) }
     }
 
     /**checkBiometric is used to check the biometric functionality
@@ -220,16 +228,6 @@ class ProfileFragment : Fragment() {
     /**choosePhotoFromGallery is used to choose the photo from gallery*/
     private fun choosePhotoFromGallery() {
         getContent.launch(PickVisualMediaRequest(ActivityResultContracts.PickVisualMedia.ImageOnly))
-    }
-
-    /**requestToReload is used to request to reload the activity*/
-    private fun requestToReload() {
-        Intent(context, LoginActivity::class.java).apply {
-            flags = Intent.FLAG_ACTIVITY_NEW_TASK
-        }.apply {
-            startActivity(this)
-        }
-        activity?.finish()
     }
 
     override fun onDestroyView() {

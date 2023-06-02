@@ -6,7 +6,7 @@
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.deshboard.ui.home.HomeFragment">
+        tools:context=".ui.deshboard.ui.home.DashBoardFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -41,9 +41,9 @@
                 android:layout_width="@dimen/img_sixty"
                 android:layout_height="@dimen/img_sixty"
                 android:layout_marginVertical="@dimen/thirtyDp"
+                android:layout_marginStart="@dimen/thirtyDp"
                 android:background="@drawable/profile_image_round_background"
                 android:clipToOutline="true"
-                android:layout_marginStart="@dimen/thirtyDp"
                 android:scaleType="centerCrop"
                 android:src="@drawable/placeholder_image"
                 app:layout_constraintStart_toStartOf="parent"
@@ -82,6 +82,15 @@
                 app:layout_constraintTop_toBottomOf="@+id/tvFullName"
                 tools:listitem="@layout/item_parent_home" />
 
+            <ProgressBar
+                android:id="@+id/progress"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.core.widget.NestedScrollView>
 </layout>

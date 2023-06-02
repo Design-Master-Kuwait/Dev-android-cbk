@@ -4,6 +4,8 @@ import android.Manifest
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.biometric.BiometricPrompt
@@ -12,6 +14,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.lifecycleScope
 import com.example.data.utils.KeyStorePreference
 import com.example.newbankingproject.databinding.ActivitySplashBinding
+import com.example.newbankingproject.ui.biometric.FingerPrintActivity
 import com.example.newbankingproject.ui.deshboard.MainActivity
 import com.example.newbankingproject.ui.login.LoginActivity
 import com.example.newbankingproject.util.Utility
@@ -33,7 +36,7 @@ class SplashActivity : AppCompatActivity() {
     private lateinit var executor: Executor
     lateinit var biometricPrompt: BiometricPrompt
     private lateinit var promptInfo: BiometricPrompt.PromptInfo
-
+    lateinit var looper: Looper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -58,23 +61,39 @@ class SplashActivity : AppCompatActivity() {
     /**initializeView is used to initialize the views*/
     private fun initializeView() {
         lifecycleScope.launch {
-            delay(DELAY)
-            if (preference.isFingerPrintEnable())
-                initializeBiometric()
+            delay(4500)
             setLocale()
-            checkLoginStatus()
+            if (preference.isFingerPrintEnable())
+                setBiometric()
+            else
+                checkLoginStatus()
         }
+//        Looper.myLooper()?.let {
+//            Handler(it).postDelayed({
+//                setLocale()
+//                if (preference.isFingerPrintEnable())
+//                    setBiometric()
+//                else
+//                    checkLoginStatus()
+//            }, 4500L)
+//        }
+    }
+
+    private fun setBiometric() {
+        val intent = Intent(this@SplashActivity, FingerPrintActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
+        this.startActivity(intent)
+        this@SplashActivity.finishAffinity()
     }
 
     /**checkLoginStatus is used to check the status of login screen*/
     private fun checkLoginStatus() {
-        if (preference.isLogin()) {
-            Intent(this, MainActivity::class.java).apply { startActivity(this) }
-            finish()
-        } else {
-            Intent(this, LoginActivity::class.java).apply { startActivity(this) }
-            finish()
-        }
+        Intent(
+            this,
+            if (preference.isLogin()) MainActivity::class.java else LoginActivity::class.java
+        ).apply { startActivity(this) }
+        finish()
+
     }
 
 
@@ -115,7 +134,7 @@ class SplashActivity : AppCompatActivity() {
             // Biometric authentication succeeded
             Toast.makeText(applicationContext, "Authentication succeeded", Toast.LENGTH_SHORT)
                 .show()
-            Intent(this@SplashActivity, MainActivity::class.java).apply { startActivity(this) }
+//            Intent(this@SplashActivity, MainActivity::class.java).apply { startActivity(this) }
             finish()
         }
 
@@ -126,13 +145,12 @@ class SplashActivity : AppCompatActivity() {
                 "Authentication error: $errString",
                 Toast.LENGTH_SHORT
             ).show()
-            Intent(this@SplashActivity, LoginActivity::class.java).apply { startActivity(this) }
+//            Intent(this@SplashActivity, LoginActivity::class.java).apply { startActivity(this) }
         }
 
         override fun onAuthenticationFailed() {
-            // Biometric authentication failed
             Toast.makeText(applicationContext, "Authentication failed", Toast.LENGTH_SHORT).show()
-            Intent(this@SplashActivity, LoginActivity::class.java).apply { startActivity(this) }
+//            Intent(this@SplashActivity, LoginActivity::class.java).apply { startActivity(this) }
             finishAffinity()
         }
     }

@@ -1,381 +1,399 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:supportsRtl="true"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    android:supportsRtl="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/ivBack"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="@dimen/thirtyDp"
+        android:src="@drawable/ic_back_icon"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tvProfile"
+        style="@style/TextView.20sp.Black.Inter_Medium"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/twentydp"
+        android:text="@string/profile"
+        app:layout_constraintBottom_toBottomOf="@+id/ivBack"
+        app:layout_constraintStart_toEndOf="@+id/ivBack"
+        app:layout_constraintTop_toTopOf="@+id/ivBack" />
+
+    <ProgressBar
+        android:id="@+id/progress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <androidx.appcompat.widget.AppCompatImageView
-            android:id="@+id/ivBack"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/thirtyDp"
-            android:src="@drawable/ic_back_icon"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvProfile"
-            style="@style/TextView.20sp.Black.Inter_Medium"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/twentydp"
-            android:text="@string/profile"
-            app:layout_constraintBottom_toBottomOf="@+id/ivBack"
-            app:layout_constraintStart_toEndOf="@+id/ivBack"
-            app:layout_constraintTop_toTopOf="@+id/ivBack" />
+        android:layout_height="@dimen/_0dp"
+        android:layout_marginTop="@dimen/thirtyDp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvProfile"
+        app:layout_constraintVertical_bias="0.5">
 
         <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/constraintLayout"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/thirtyDp"
-            android:layout_marginTop="@dimen/thirtyDp"
-            android:background="@drawable/profile_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvProfile">
+            android:layout_height="match_parent">
 
-            <com.google.android.material.imageview.ShapeableImageView
-                android:id="@+id/ivProfileImage"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
-                app:shapeAppearanceOverlay="@style/roundedImageView"
-                android:layout_marginVertical="@dimen/eightdp"
-                android:clipToOutline="true"
-                android:scaleType="centerCrop"
-                android:src="@drawable/placeholder_image"
-                app:layout_constraintBottom_toBottomOf="parent"
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/constraintLayout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/thirtyDp"
+                android:background="@drawable/profile_background"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.appcompat.widget.AppCompatImageView
-                android:id="@+id/ivSelectImage"
-                android:layout_width="@dimen/thirtyDp"
-                android:layout_height="@dimen/thirtyDp"
-                android:src="@drawable/camera_background"
-                app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
-                app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
-                app:layout_constraintTop_toTopOf="@+id/ivProfileImage"
-                app:layout_constraintVertical_bias="1.0" />
-
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvFullNameTitle"
-            style="@style/TextView.16sp.Black.Inter_SemiBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/txt_sixteen"
-            android:text="@string/full_name"
-            app:layout_constraintStart_toStartOf="@+id/etFullName"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etFullName"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/thirtyDp"
-            android:layout_marginVertical="@dimen/txt_seventeen"
-            android:layout_marginTop="@dimen/fivedp"
-            android:textAlignment="viewStart"
-            android:background="@drawable/profile_background"
-            android:paddingHorizontal="@dimen/txt_seventeen"
-            android:hint="@string/full_name"
-            android:paddingVertical="@dimen/txt_seventeen"
-            android:inputType="textPersonName"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvFullNameTitle" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvEmail"
-            style="@style/TextView.16sp.Black.Inter_SemiBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/txt_sixteen"
-            android:text="@string/e_mail"
-            app:layout_constraintStart_toStartOf="@+id/etFullName"
-            app:layout_constraintTop_toBottomOf="@+id/etFullName" />
-
-        <androidx.appcompat.widget.AppCompatEditText
-            android:id="@+id/etEmail"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/thirtyDp"
-            android:layout_marginVertical="@dimen/txt_seventeen"
-            android:background="@drawable/profile_background"
-            android:hint="@string/e_mail"
-            android:paddingHorizontal="@dimen/txt_seventeen"
-            android:textAlignment="viewStart"
-            android:paddingVertical="@dimen/txt_seventeen"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvPhoneNumber"
-            style="@style/TextView.16sp.Black.Inter_SemiBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/thirtyDp"
-            android:layout_marginTop="@dimen/txt_sixteen"
-            android:text="@string/phone_number"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/etEmail" />
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/mainPhone"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginHorizontal="@dimen/thirtyDp"
-            android:layout_marginVertical="@dimen/txt_seventeen"
-            android:background="@drawable/profile_background"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber">
-
-            <androidx.appcompat.widget.AppCompatTextView
-                android:id="@+id/tvCode"
-                style="@style/TextView.16sp.Blue.Inter_Medium"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingHorizontal="@dimen/txt_nineteen"
-                android:paddingVertical="@dimen/txt_seventeen"
-                android:text="@string/_91"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-
-            <androidx.appcompat.widget.AppCompatEditText
-                android:id="@+id/etPhoneNumber"
-                style="@style/TextView.16sp.Black.Inter_SemiBold"
-                android:layout_width="@dimen/_0dp"
-                android:layout_height="@dimen/_0dp"
-                android:background="@android:color/transparent"
-                android:gravity="start|center"
-                android:hint="@string/phone_number"
-                android:maxLength="10"
-                android:textAlignment="viewStart"
-                android:paddingHorizontal="@dimen/tenDp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/tvCode"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.5" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
-
-        <androidx.appcompat.widget.AppCompatButton
-            android:id="@+id/btnContinue"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/thirtyDp"
-            android:layout_marginVertical="@dimen/txt_sixteen"
-            android:background="@drawable/button_background"
-            android:text="@string/update_profile"
-            android:textAllCaps="false"
-            android:textColor="@color/white"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/mainPhone" />
-
-        <androidx.appcompat.widget.AppCompatTextView
-            android:id="@+id/tvSettings"
-            style="@style/TextView.16sp.Black.Inter_SemiBold"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/txt_sixteen"
-            android:text="@string/settings"
-            app:layout_constraintStart_toStartOf="@+id/btnContinue"
-            app:layout_constraintTop_toBottomOf="@+id/btnContinue" />
-
-        <androidx.cardview.widget.CardView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="@dimen/thirtyDp"
-            android:layout_marginTop="@dimen/tenDp"
-            android:layout_marginBottom="@dimen/thirtyDp"
-            app:cardCornerRadius="@dimen/eightdp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.5"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/tvSettings"
-            app:layout_constraintVertical_bias="0.5">
-
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="match_parent">
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvChangePassword"
-                    style="@style/TextView.14sp.Black.Inter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/txt_sixteen"
-                    android:layout_marginTop="@dimen/txt_sixteen"
-                    android:drawableEnd="@drawable/ic_forword_arrow_icon"
-                    android:gravity="start"
-                    android:text="@string/change_password"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent" />
-
-                <View
-                    android:id="@+id/viewChange"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginHorizontal="@dimen/txt_sixteen"
-                    android:layout_marginTop="@dimen/tenDp"
-                    android:background="@color/light_black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvChangePassword"
-                    app:layout_constraintVertical_bias="0.5" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/scLanguage"
-                    style="@style/TextView.14sp.Black.Inter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/txt_sixteen"
-                    android:gravity="start|center"
-                    android:text="@string/language"
-                    app:track="@drawable/custom_track"
-                    android:thumb="@drawable/custom_thumb"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewChange" />
-
-                <View
-                    android:id="@+id/viewLanguage"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/scLanguage"
-                    app:layout_constraintVertical_bias="0.5" />
-
-                <androidx.appcompat.widget.SwitchCompat
-                    android:id="@+id/scFingerPrint"
-                    style="@style/TextView.14sp.Black.Inter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    app:track="@drawable/custom_track"
-                    android:thumb="@drawable/custom_thumb"
-                    android:layout_marginHorizontal="@dimen/txt_sixteen"
-                    android:gravity="start|center"
-                    android:text="@string/fingerprint_sensor"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewLanguage" />
-
-                <View
-                    android:id="@+id/viewNotification"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/scFingerPrint"
-                    app:layout_constraintVertical_bias="0.5" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvAppPolicy"
-                    style="@style/TextView.14sp.Black.Inter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/txt_sixteen"
-                    android:layout_marginVertical="@dimen/txt_sixteen"
-                    android:gravity="start|center"
-                    android:drawableEnd="@drawable/ic_forword_arrow_icon"
-                    android:text="@string/app_policy"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewNotification" />
-
-                <View
-                    android:id="@+id/viewAppPolicy"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:background="@color/light_black"
-                    android:layout_marginTop="@dimen/tenDp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvAppPolicy"
-                    app:layout_constraintVertical_bias="0.5" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvTerms"
-                    style="@style/TextView.14sp.Black.Inter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/txt_sixteen"
-                    android:layout_marginVertical="@dimen/txt_sixteen"
-                    android:drawableEnd="@drawable/ic_forword_arrow_icon"
-                    android:gravity="start|center"
-                    android:text="@string/terms_and_conditions"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewAppPolicy" />
-
-                <View
-                    android:id="@+id/viewLogout"
-                    android:layout_width="match_parent"
-                    android:layout_height="1dp"
-                    android:layout_marginTop="@dimen/tenDp"
-                    android:background="@color/light_black"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/tvTerms"
-                    app:layout_constraintVertical_bias="0.5" />
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:id="@+id/tvLogout"
-                    style="@style/TextView.14sp.Black.Inter"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginHorizontal="@dimen/txt_sixteen"
-                    android:layout_marginVertical="@dimen/txt_sixteen"
-                    android:gravity="start|center"
-                    android:text="@string/logout"
-                    android:textColor="@android:color/holo_red_dark"
+                <com.google.android.material.imageview.ShapeableImageView
+                    android:id="@+id/ivProfileImage"
+                    android:layout_width="100dp"
+                    android:layout_height="100dp"
+                    android:layout_marginVertical="@dimen/eightdp"
+                    android:clipToOutline="true"
+                    android:scaleType="centerCrop"
+                    android:src="@drawable/placeholder_image"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.5"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/viewLogout"
-                    app:layout_constraintVertical_bias="0.5" />
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:shapeAppearanceOverlay="@style/roundedImageView" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/ivSelectImage"
+                    android:layout_width="@dimen/thirtyDp"
+                    android:layout_height="@dimen/thirtyDp"
+                    android:src="@drawable/camera_background"
+                    app:layout_constraintBottom_toBottomOf="@+id/ivProfileImage"
+                    app:layout_constraintEnd_toEndOf="@+id/ivProfileImage"
+                    app:layout_constraintHorizontal_bias="1.0"
+                    app:layout_constraintStart_toStartOf="@+id/ivProfileImage"
+                    app:layout_constraintTop_toTopOf="@+id/ivProfileImage"
+                    app:layout_constraintVertical_bias="1.0" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
-        </androidx.cardview.widget.CardView>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvFullNameTitle"
+                style="@style/TextView.16sp.Black.Inter_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/txt_sixteen"
+                android:text="@string/full_name"
+                app:layout_constraintStart_toStartOf="@+id/etFullName"
+                app:layout_constraintTop_toBottomOf="@+id/constraintLayout" />
 
-</androidx.core.widget.NestedScrollView>
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etFullName"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/thirtyDp"
+                android:layout_marginVertical="@dimen/txt_seventeen"
+                android:layout_marginTop="@dimen/fivedp"
+                android:background="@drawable/profile_background"
+                android:hint="@string/full_name"
+                android:inputType="textPersonName"
+                android:paddingHorizontal="@dimen/txt_seventeen"
+                android:paddingVertical="@dimen/txt_seventeen"
+                android:textAlignment="viewStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvFullNameTitle" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvEmail"
+                style="@style/TextView.16sp.Black.Inter_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/txt_sixteen"
+                android:text="@string/e_mail"
+                app:layout_constraintStart_toStartOf="@+id/etFullName"
+                app:layout_constraintTop_toBottomOf="@+id/etFullName" />
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/etEmail"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/thirtyDp"
+                android:layout_marginVertical="@dimen/txt_seventeen"
+                android:background="@drawable/profile_background"
+                android:hint="@string/e_mail"
+                android:paddingHorizontal="@dimen/txt_seventeen"
+                android:paddingVertical="@dimen/txt_seventeen"
+                android:textAlignment="viewStart"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvEmail" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvPhoneNumber"
+                style="@style/TextView.16sp.Black.Inter_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/thirtyDp"
+                android:layout_marginTop="@dimen/txt_sixteen"
+                android:text="@string/phone_number"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etEmail" />
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/mainPhone"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginHorizontal="@dimen/thirtyDp"
+                android:layout_marginVertical="@dimen/txt_seventeen"
+                android:background="@drawable/profile_background"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvPhoneNumber">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tvCode"
+                    style="@style/TextView.16sp.Blue.Inter_Medium"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="@dimen/txt_nineteen"
+                    android:paddingVertical="@dimen/txt_seventeen"
+                    android:text="@string/_91"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/etPhoneNumber"
+                    style="@style/TextView.16sp.Black.Inter_SemiBold"
+                    android:layout_width="@dimen/_0dp"
+                    android:layout_height="@dimen/_0dp"
+                    android:background="@android:color/transparent"
+                    android:gravity="start|center"
+                    android:hint="@string/phone_number"
+                    android:maxLength="10"
+                    android:paddingHorizontal="@dimen/tenDp"
+                    android:textAlignment="viewStart"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@+id/tvCode"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.5" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:id="@+id/btnContinue"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/thirtyDp"
+                android:layout_marginVertical="@dimen/txt_sixteen"
+                android:background="@drawable/button_background"
+                android:text="@string/update_profile"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/mainPhone" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tvSettings"
+                style="@style/TextView.16sp.Black.Inter_SemiBold"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/txt_sixteen"
+                android:text="@string/settings"
+                app:layout_constraintStart_toStartOf="@+id/btnContinue"
+                app:layout_constraintTop_toBottomOf="@+id/btnContinue" />
+
+            <androidx.cardview.widget.CardView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="@dimen/thirtyDp"
+                android:layout_marginTop="@dimen/tenDp"
+                android:layout_marginBottom="@dimen/thirtyDp"
+                app:cardCornerRadius="@dimen/eightdp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvSettings"
+                app:layout_constraintVertical_bias="0.5">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvChangePassword"
+                        style="@style/TextView.14sp.Black.Inter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/txt_sixteen"
+                        android:layout_marginTop="@dimen/txt_sixteen"
+                        android:drawableEnd="@drawable/ic_forword_arrow_icon"
+                        android:gravity="start"
+                        android:text="@string/change_password"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <View
+                        android:id="@+id/viewChange"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginHorizontal="@dimen/txt_sixteen"
+                        android:layout_marginTop="@dimen/tenDp"
+                        android:background="@color/light_black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvChangePassword"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/scLanguage"
+                        style="@style/TextView.14sp.Black.Inter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/txt_sixteen"
+                        android:gravity="start|center"
+                        android:text="@string/language"
+                        android:thumb="@drawable/custom_thumb"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewChange"
+                        app:track="@drawable/custom_track" />
+
+                    <View
+                        android:id="@+id/viewLanguage"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/scLanguage"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                    <androidx.appcompat.widget.SwitchCompat
+                        android:id="@+id/scFingerPrint"
+                        style="@style/TextView.14sp.Black.Inter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/txt_sixteen"
+                        android:gravity="start|center"
+                        android:text="@string/fingerprint_sensor"
+                        android:thumb="@drawable/custom_thumb"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewLanguage"
+                        app:track="@drawable/custom_track" />
+
+                    <View
+                        android:id="@+id/viewNotification"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/light_black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/scFingerPrint"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvAppPolicy"
+                        style="@style/TextView.14sp.Black.Inter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/txt_sixteen"
+                        android:layout_marginVertical="@dimen/txt_sixteen"
+                        android:drawableEnd="@drawable/ic_forword_arrow_icon"
+                        android:gravity="start|center"
+                        android:text="@string/app_policy"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewNotification" />
+
+                    <View
+                        android:id="@+id/viewAppPolicy"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/tenDp"
+                        android:background="@color/light_black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvAppPolicy"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvTerms"
+                        style="@style/TextView.14sp.Black.Inter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/txt_sixteen"
+                        android:layout_marginVertical="@dimen/txt_sixteen"
+                        android:drawableEnd="@drawable/ic_forword_arrow_icon"
+                        android:gravity="start|center"
+                        android:text="@string/terms_and_conditions"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewAppPolicy" />
+
+                    <View
+                        android:id="@+id/viewLogout"
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:layout_marginTop="@dimen/tenDp"
+                        android:background="@color/light_black"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/tvTerms"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tvLogout"
+                        style="@style/TextView.14sp.Black.Inter"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="@dimen/txt_sixteen"
+                        android:layout_marginVertical="@dimen/txt_sixteen"
+                        android:gravity="start|center"
+                        android:text="@string/logout"
+                        android:textColor="@android:color/holo_red_dark"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintHorizontal_bias="0.5"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@+id/viewLogout"
+                        app:layout_constraintVertical_bias="0.5" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </androidx.cardview.widget.CardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.core.widget.NestedScrollView>
+</androidx.constraintlayout.widget.ConstraintLayout>

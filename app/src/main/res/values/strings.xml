@@ -60,4 +60,5 @@
     <string name="eng_lang">English</string>
     <string name="arabic_lang">عربي</string>
     <string name="submit">submit</string>
+    <string name="please_autanticate_yourself">Please Authenticate yourself</string>
 </resources>
