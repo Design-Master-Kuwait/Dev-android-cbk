@@ -13,6 +13,7 @@ import com.example.domain.repository.DashboardRepository
 import com.example.domain.utils.Resource
 import javax.inject.Inject
 
+/**DashboardDataSourceImpl is data source class for dashboard*/
 class DashboardDataSourceImpl @Inject constructor(
     private val apiService: ApiService,
 ) : DashboardRepository {

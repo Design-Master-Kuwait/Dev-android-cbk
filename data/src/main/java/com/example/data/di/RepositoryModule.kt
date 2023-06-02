@@ -13,6 +13,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
+/** RepositoryModule is module for repository*/
 class RepositoryModule {
 
     @Provides

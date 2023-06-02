@@ -6,6 +6,7 @@ import com.example.domain.repository.LoginRepository
 import com.example.domain.utils.Resource
 import javax.inject.Inject
 
+/**LoginUseCase is used to create use case login*/
 class LoginUseCase @Inject constructor(
     private val repository: LoginRepository,
 ) {

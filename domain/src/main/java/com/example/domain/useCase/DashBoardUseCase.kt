@@ -6,6 +6,7 @@ import com.example.domain.repository.DashboardRepository
 import com.example.domain.utils.Resource
 import javax.inject.Inject
 
+/**DashBoardUseCase is used to create use case file for dashboard*/
 class DashBoardUseCase @Inject constructor(
     private val repository: DashboardRepository,
 ) {

@@ -7,7 +7,6 @@ import android.content.res.Configuration
 import android.net.ConnectivityManager
 import android.net.NetworkCapabilities
 import android.os.Build
-import android.view.View
 import android.widget.Toast
 import androidx.biometric.BiometricManager
 import com.example.data.utils.KeyStorePreference

@@ -12,6 +12,7 @@ import com.example.data.utils.Constant.PHONE
 import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
+/**KeyStorePreference is main class for key store shared preference*/
 class KeyStorePreference @Inject constructor(
     @ApplicationContext val context: Context,
     val preferences: SharedPreferences,

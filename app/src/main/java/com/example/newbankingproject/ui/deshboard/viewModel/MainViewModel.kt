@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.data.utils.KeyStorePreference
 import com.example.domain.model.dashboard.DashboardResponseModel
 import com.example.domain.model.dashboard.ProfileResponseModel
 import com.example.domain.useCase.DashBoardUseCase
@@ -23,7 +24,7 @@ import javax.inject.Inject
 @HiltViewModel
 class MainViewModel @Inject constructor(
     private val dashBoardUseCase: DashBoardUseCase,
-    @ApplicationContext var context: Context?,
+    @ApplicationContext var context: Context?
 ) : ViewModel() {
 
     private val profileData = MutableLiveData<Resource<ProfileResponseModel>>()

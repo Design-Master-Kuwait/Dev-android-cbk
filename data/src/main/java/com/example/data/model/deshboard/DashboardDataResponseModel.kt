@@ -2,6 +2,7 @@ package com.example.data.model.deshboard
 
 import com.google.gson.annotations.SerializedName
 
+/**DashboardDataResponseModel is data clas for dashboard api*/
 data class DashboardDataResponseModel(
     @SerializedName("error") var error: Boolean? = null,
     @SerializedName("data") var data: ArrayList<DashboardDataResponse> = arrayListOf(),

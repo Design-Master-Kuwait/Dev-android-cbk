@@ -1,5 +1,6 @@
 package com.example.domain.model.dashboard
 
+/**DashboardResponseModel is model class for dashboard response*/
 data class DashboardResponseModel(
     var error: Boolean? = null,
     var data: ArrayList<DashboardData> = arrayListOf(),

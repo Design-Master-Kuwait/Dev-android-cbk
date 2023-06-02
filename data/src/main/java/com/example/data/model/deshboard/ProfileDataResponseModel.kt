@@ -2,6 +2,7 @@ package com.example.data.model.deshboard
 
 import com.google.gson.annotations.SerializedName
 
+/**ProfileDataResponseModel is data class for profile api*/
 data class ProfileDataResponseModel(
     @SerializedName("error") var error: Boolean? = null,
     @SerializedName("data") var data: ProfileDataResponse? = ProfileDataResponse(),

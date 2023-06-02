@@ -16,6 +16,7 @@ import javax.inject.Singleton
 
 @Module
 @InstallIn(SingletonComponent::class)
+/**KeyStoreModule class is module for key store preference*/
 class KeyStoreModule {
 
     @Provides

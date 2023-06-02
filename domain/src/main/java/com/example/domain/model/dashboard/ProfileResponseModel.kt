@@ -1,5 +1,6 @@
 package com.example.domain.model.dashboard
 
+/**ProfileResponseModel is model class for profile response data*/
 data class ProfileResponseModel(
     var error: Boolean? = null,
     var data: Data? = Data(),

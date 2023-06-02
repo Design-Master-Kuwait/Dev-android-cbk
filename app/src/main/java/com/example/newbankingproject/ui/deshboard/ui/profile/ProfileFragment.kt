@@ -5,7 +5,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -50,8 +49,6 @@ class ProfileFragment : Fragment() {
     /** getContent is use to return registerForActivityResult */
     private val getContent =
         registerForActivityResult(ActivityResultContracts.PickVisualMedia()) { uri: Uri? ->
-            // Handle the returned Uri
-
             val flag = Intent.FLAG_GRANT_READ_URI_PERMISSION
             if (uri != null) {
                 context?.contentResolver?.takePersistableUriPermission(uri, flag)

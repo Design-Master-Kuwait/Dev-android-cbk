@@ -1,5 +1,6 @@
 package com.example.domain.utils
 
+/**Resource is sealed class used to get api data in structured way*/
 sealed class Resource<T>(
     val data: T? = null,
     val message: String? = null,
