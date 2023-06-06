@@ -1,6 +1,3 @@
-# Dev-android-cbk
-Sure! Here's a document outlining the implementation details for the mentioned requirements:
-
 # Application Architecture - MVVM
 
 The application architecture will follow the MVVM Clean Architecture (Model-View-ViewModel) pattern to separate the UI and code structure logic from the data and business logic. This pattern allows for better maintainability, testability, and scalability of the application.
