@@ -12,6 +12,7 @@ import androidx.core.content.ContextCompat
 import com.example.newbankingproject.databinding.ActivityFingerPrintBinding
 import com.example.newbankingproject.ui.deshboard.MainActivity
 import com.example.newbankingproject.ui.login.LoginActivity
+import com.example.newbankingproject.util.Constant
 import com.example.newbankingproject.util.Utility
 import java.util.concurrent.Executor
 
@@ -43,7 +44,7 @@ class FingerPrintActivity : AppCompatActivity() {
         if (Utility.isBiometricAvailable(context = this)) {
             requestBiometricPermission()
         } else {
-            Toast.makeText(this, "Biometric authentication is not available", Toast.LENGTH_SHORT)
+            Toast.makeText(this, Constant.BIOMETRIC_UNAVAILABLE, Toast.LENGTH_SHORT)
                 .show()
         }
     }
@@ -68,10 +69,7 @@ class FingerPrintActivity : AppCompatActivity() {
     }
 
     /**showBiometricPrompt is used to show biometric prompt*/
-    private fun showBiometricPrompt() {
-        // Display the biometric prompt
-        biometricPrompt.authenticate(promptInfo)
-    }
+    private fun showBiometricPrompt() = biometricPrompt.authenticate(promptInfo)
 
     /**createPromptInfo is used to create prompt info*/
     private fun createPromptInfo() = BiometricPrompt.PromptInfo.Builder()
@@ -82,7 +80,6 @@ class FingerPrintActivity : AppCompatActivity() {
 
     private val authenticationCallback = object : BiometricPrompt.AuthenticationCallback() {
         override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
-            // Biometric authentication succeeded
             Toast.makeText(applicationContext, "Authentication succeeded", Toast.LENGTH_SHORT)
                 .show()
             Intent(this@FingerPrintActivity, MainActivity::class.java).apply { startActivity(this) }
@@ -90,7 +87,6 @@ class FingerPrintActivity : AppCompatActivity() {
         }
 
         override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
-            // Biometric authentication encountered an error
             Toast.makeText(
                 applicationContext,
                 "Authentication error: $errString",

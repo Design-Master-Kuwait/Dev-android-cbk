@@ -23,9 +23,11 @@ import com.example.newbankingproject.listener.AlertDialogInterface
 import com.example.newbankingproject.ui.deshboard.MainActivity
 import com.example.newbankingproject.ui.deshboard.viewModel.MainViewModel
 import com.example.newbankingproject.ui.login.LoginActivity
+import com.example.newbankingproject.util.Constant
+import com.example.newbankingproject.util.Constant.BIOMETRIC_UNAVAILABLE
 import com.example.newbankingproject.util.Dialogs
 import com.example.newbankingproject.util.Utility
-import com.example.newbankingproject.util.Utility.Companion.toastMessage
+import com.example.newbankingproject.util.Utility.toastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import javax.inject.Inject
@@ -87,9 +89,7 @@ class ProfileFragment : Fragment() {
                 }
 
                 is Resource.Success -> {
-                    if (it.data != null) {
-                        setRemoteData(it.data)
-                    }
+                    if (it.data != null) setRemoteData(it.data)
                     binding.progress setVisibility false
                 }
 
@@ -106,16 +106,18 @@ class ProfileFragment : Fragment() {
 
     /**setRemoteData is used to set the data which come from remote*/
     private fun setRemoteData(data: ProfileResponseModel?) {
-        binding.etFullName.setText(data?.data?.name?: preference.getUserName() ?:"")
+        binding.etFullName.setText(data?.data?.name ?: preference.getUserName() ?: "")
         binding.etEmail.setText(data?.data?.email ?: preference.getEmail() ?: "")
         binding.etPhoneNumber.setText(data?.data?.phone ?: preference.getPhoneNumber() ?: "")
+        if (preference.getUserName() == null) preference.storeFirstName(data?.data?.name)
+        if (preference.getEmail() == null) preference.storeEmail(data?.data?.email)
+        if (preference.getPhoneNumber() == null) preference.storePhone(data?.data?.phone)
     }
 
     /**setData is used to set the data from shared preference*/
     private fun setData() {
-        if (preference.getProfileImage() != null) {
+        if (preference.getProfileImage() != null)
             binding.ivProfileImage.setImageURI(Uri.parse(preference.getProfileImage()))
-        }
         binding.scLanguage.isChecked = preference.getLanguage() == "en"
         binding.scFingerPrint.isChecked = preference.isFingerPrintEnable()
     }
@@ -139,7 +141,11 @@ class ProfileFragment : Fragment() {
             showChangeLanguageAlert(requireActivity())
         }
         binding.scFingerPrint.setOnCheckedChangeListener { _, isChecked ->
-            Toast.makeText(context, if(isChecked)"Fingerprint Authentication : Enabled" else "Fingerprint Authentication : Disabled", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                if (isChecked) Constant.FINGER_PRINT_ENABLE else Constant.FINGER_PRINT_DISABLE,
+                Toast.LENGTH_SHORT
+            ).show()
             checkBiometric(isChecked)
         }
 
@@ -154,11 +160,11 @@ class ProfileFragment : Fragment() {
             noBtn = activity.resources.getString(R.string.arabic_lang),
             alertDialogInterface = object : AlertDialogInterface {
                 override fun onYesClick() {
-                    changeLanguage("en")
+                    changeLanguage(Constant.ENGLISH_LANG)
                 }
 
                 override fun onNoClick() {
-                    changeLanguage("ar")
+                    changeLanguage(Constant.ARABIC_LANG)
                 }
             })
     }
@@ -191,8 +197,7 @@ class ProfileFragment : Fragment() {
         } else {
             binding.scFingerPrint.isChecked = false
             binding.scFingerPrint.isEnabled = false
-            Toast.makeText(context, "Biometric authentication is not available", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(context, BIOMETRIC_UNAVAILABLE, Toast.LENGTH_SHORT).show()
         }
     }
 

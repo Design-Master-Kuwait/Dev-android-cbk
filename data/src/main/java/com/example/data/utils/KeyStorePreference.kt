@@ -27,6 +27,7 @@ class KeyStorePreference @Inject constructor(
 
     fun storeFirstName(value: String?) {
         edit.putString(FULL_NAME, value)
+        edit.commit()
     }
 
     fun storePhone(value: String?) {

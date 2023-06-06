@@ -46,7 +46,7 @@ class DailyNeedsViewHolder(var item: ItemDailyNeedsBinding) : RecyclerView.ViewH
                 "%d %s",
                 data?.totalQty,
                 data?.unit
-            ) else String.format("%d %s" , data?.totalPrice , data?.unit)
+            ) else String.format("%d %s", data?.totalPrice, data?.unit)
         }
     }
 

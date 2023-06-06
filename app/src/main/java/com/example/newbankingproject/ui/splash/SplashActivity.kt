@@ -35,13 +35,14 @@ class SplashActivity : AppCompatActivity() {
             delay(4500)
             setLocale()
             if (preference.isFingerPrintEnable())
-                setBiometric()
+                openFingerPrintActivity()
             else
                 checkLoginStatus()
         }
     }
 
-    private fun setBiometric() {
+    /**setBiometric is used to set biometric */
+    private fun openFingerPrintActivity() {
         val intent = Intent(this@SplashActivity, FingerPrintActivity::class.java)
         intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK
         this.startActivity(intent)
@@ -55,7 +56,6 @@ class SplashActivity : AppCompatActivity() {
             if (preference.isLogin()) MainActivity::class.java else LoginActivity::class.java
         ).apply { startActivity(this) }
         finish()
-
     }
 
     /**setLocale is used to set the locale*/

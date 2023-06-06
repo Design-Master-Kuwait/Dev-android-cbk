@@ -60,5 +60,6 @@
     <string name="select_alert_title_lang">Alert!</string>
     <string name="submit">يُقدِّم</string>
     <string name="please_autanticate_yourself">الرجاء المصادقة على نفسك</string>
+    <string name="empty_field">Please fill your empty fields</string>
 
 </resources>

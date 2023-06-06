@@ -39,8 +39,8 @@ class MonthSummeryAdapter constructor(
 class MonthSummeryViewHolder(var item: ItemDateBinding) : RecyclerView.ViewHolder(item.root) {
     fun bind(data: DashboardProfileData?) {
         item.apply {
-            tvName.text = data?.productName?:"Milk"
-            tvQuantity.text = String.format("%d %s", data?.totalQty?:1, data?.unit?: "Lt")
+            tvName.text = data?.productName ?: "Milk"
+            tvQuantity.text = String.format("%d %s", data?.totalQty ?: 1, data?.unit ?: "Lt")
         }
     }
 

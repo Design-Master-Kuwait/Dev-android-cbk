@@ -18,8 +18,10 @@ import com.example.newbankingproject.listener.AlertDialogInterface
 import com.example.newbankingproject.ui.deshboard.MainActivity
 import com.example.newbankingproject.ui.login.LoginActivity
 import com.example.newbankingproject.ui.login.viewModel.LoginViewModel
+import com.example.newbankingproject.util.Constant.ARABIC_LANG
+import com.example.newbankingproject.util.Constant.ENGLISH_LANG
 import com.example.newbankingproject.util.Dialogs
-import com.example.newbankingproject.util.Utility.Companion.toastMessage
+import com.example.newbankingproject.util.Utility.toastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import java.util.Locale
 import javax.inject.Inject
@@ -62,14 +64,11 @@ class LoginScreenFragment : Fragment() {
 
 
     /** validation is used to validate the phone and password field*/
-    private fun validation(phone: String, password: String): Boolean {
-        binding.progress.setVisibility(false)
+    fun validation(phone: String, password: String): Boolean {
         if (phone.isEmpty()) {
-            getString(R.string.code_error).toastMessage(context)
             return false
         }
         if (password.isEmpty()) {
-            getString(R.string.phone_error).toastMessage(context)
             return false
         }
         return true
@@ -78,11 +77,14 @@ class LoginScreenFragment : Fragment() {
     /**setOnClickListener is used to call setOnCLickListeners for views*/
     private fun setOnClickListener() {
         binding.btnContinue.setOnClickListener {
-            binding.progress.setVisibility(true)
+
             val phone = binding.etPhoneNumber.text.toString()
             val password = binding.etPassword.text.toString()
             if (validation(phone, password)) {
+                binding.progress setVisibility true
                 viewModel.postAuthApi(phone, password)
+            } else {
+                getString(R.string.empty_field) toastMessage context
             }
         }
 
@@ -104,11 +106,11 @@ class LoginScreenFragment : Fragment() {
             noBtn = resources.getString(R.string.arabic_lang),
             alertDialogInterface = object : AlertDialogInterface {
                 override fun onYesClick() {
-                    changeLanguage("en")
+                    changeLanguage(ENGLISH_LANG)
                 }
 
                 override fun onNoClick() {
-                    changeLanguage("ar")
+                    changeLanguage(ARABIC_LANG)
                 }
             })
     }
@@ -117,12 +119,12 @@ class LoginScreenFragment : Fragment() {
     /**changeLanguage is used to change the language*/
     fun changeLanguage(language: String) {
         var locale: Locale? = null
-        if (language == "en") {
-            locale = Locale("en")
-            keyStorePreference.storeLanguage("en")
-        } else if (language.equals("ar")) {
-            locale = Locale("ar")
-            keyStorePreference.storeLanguage("ar")
+        if (language == ENGLISH_LANG) {
+            locale = Locale(ENGLISH_LANG)
+            keyStorePreference.storeLanguage(ENGLISH_LANG)
+        } else if (language.equals(ENGLISH_LANG)) {
+            locale = Locale(ARABIC_LANG)
+            keyStorePreference.storeLanguage(ARABIC_LANG)
         }
         Locale.setDefault(locale)
         val config = Configuration()

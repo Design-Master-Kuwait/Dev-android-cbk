@@ -2,7 +2,6 @@ package com.example.newbankingproject.ui.deshboard.ui.home
 
 import android.net.Uri
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -18,7 +17,7 @@ import com.example.newbankingproject.R
 import com.example.newbankingproject.databinding.FragmentHomeBinding
 import com.example.newbankingproject.ui.deshboard.adapter.DashboardMainAdapter
 import com.example.newbankingproject.ui.deshboard.viewModel.MainViewModel
-import com.example.newbankingproject.util.Utility.Companion.toastMessage
+import com.example.newbankingproject.util.Utility.toastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 

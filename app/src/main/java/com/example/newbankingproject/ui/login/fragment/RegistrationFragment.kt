@@ -14,7 +14,7 @@ import com.example.newbankingproject.R
 import com.example.newbankingproject.databinding.FragmentRegisterBinding
 import com.example.newbankingproject.ui.login.viewModel.LoginViewModel
 import com.example.newbankingproject.util.Constant
-import com.example.newbankingproject.util.Utility.Companion.toastMessage
+import com.example.newbankingproject.util.Utility.toastMessage
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -22,10 +22,10 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class RegistrationFragment : Fragment() {
 
-    private var _binding: FragmentRegisterBinding? = null
-
     @Inject
     lateinit var preference: KeyStorePreference
+
+    private var _binding: FragmentRegisterBinding? = null
 
     private val binding get() = _binding!!
 
@@ -39,7 +39,6 @@ class RegistrationFragment : Fragment() {
         _binding = FragmentRegisterBinding.inflate(inflater, container, false)
         binding.viewModel = viewModel
         return binding.root
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -54,15 +53,18 @@ class RegistrationFragment : Fragment() {
         binding.ivBack.setOnClickListener {
             Navigation.findNavController(requireView()).popBackStack()
         }
+
         binding.btnContinue.setOnClickListener {
-            binding.progress.setVisibility(true)
             val phone = binding.etPhoneNumber.text.toString()
             val name = binding.etFullName.text.toString()
             val password = binding.etPassword.text.toString()
             if (validation(name, phone, password)) {
+                binding.progress.setVisibility(true)
                 preference.storeFirstName(name)
                 preference.storePhone(phone)
                 viewModel.postRegisterApi(name, phone, password)
+            } else {
+                getString(R.string.empty_field) toastMessage context
             }
         }
     }
@@ -78,16 +80,14 @@ class RegistrationFragment : Fragment() {
 
                 is Resource.Success -> {
                     binding.progress setVisibility false
-
                     if (it.data?.success != null) {
-                        setData(it.data?.success)
+                        it.data?.success.setData()
                     }
                 }
 
                 is Resource.Loading -> {
                     binding.progress setVisibility true
                 }
-
             }
         }
 
@@ -98,34 +98,22 @@ class RegistrationFragment : Fragment() {
     }
 
     /**setData is used to set data which come from api*/
-    private fun setData(success: String?) {
-        when (success) {
+    private fun String?.setData() {
+        when (this) {
             Constant.NEW_USER_CREATED -> {
-                success toastMessage context
+                this toastMessage context
                 findNavController().navigate(R.id.action_SecondFragment_to_FirstFragment)
             }
 
             Constant.USERNAME_ALREADY_TAKEN -> {
-                success toastMessage context
+                this toastMessage context
             }
         }
     }
 
-
     /**validation is used to validate the fields*/
-    private fun validation(name: String, phone: String, password: String): Boolean {
-        if (phone.isEmpty()) {
-            getString(R.string.code_error) toastMessage context
-            return false
-        }
-        if (name.isEmpty()) {
-            getString(R.string.code_error) toastMessage context
-            return false
-        }
-        if (password.isEmpty()) {
-            getString(R.string.phone_error) toastMessage context
-            return false
-        }
+    fun validation(name: String, phone: String, password: String): Boolean {
+        if (password.isEmpty() || name.isEmpty() || phone.isEmpty()) return false
         return true
     }
 
